@@ -1,6 +1,6 @@
 # Sample Documentation
 ```@meta
-CurrentModule = JuliaTemplateRepo
+CurrentModule = AlgamesPlots
 ```
 
 This page shows how to pull in the doc strings in your code.
@@ -8,7 +8,7 @@ This page shows how to pull in the doc strings in your code.
 The first thing to do is insert
 ````markdown
 ```@meta
-CurrentModule = JuliaTemplateRepo  # your package name here
+CurrentModule = AlgamesPlots  # your package name here
 ```
 ````
 

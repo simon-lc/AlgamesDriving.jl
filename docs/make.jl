@@ -1,8 +1,8 @@
 using Documenter
-using JuliaTemplateRepo  # your package name here
+using AlgamesPlots  # your package name here
 
 makedocs(
-    sitename = "JuliaTemplateRepo",  # your package name here
+    sitename = "AlgamesPlots",  # your package name here
     format = Documenter.HTML(prettyurls = false),  # optional
     pages = [
         "Introduction" => "index.md",
@@ -20,5 +20,5 @@ makedocs(
 )
 
 deploydocs(
-    repo = "github.com/bjack205/JuliaTemplateRepo.jl.git",
+    repo = "github.com/bjack205/AlgamesPlots.jl.git",
 )

@@ -8,7 +8,7 @@ files that have defined `@testset`s. See the `test/` directory for an example.
 If you're using Julia v1.2+, we add the test dependencies the same way we add package
 dependencies: via the package manager. We first activate the `test` environment:
 ```
-] activate /path/to/JuliaTemplateRepo/test
+] activate /path/to/AlgamesPlots/test
 ```
 and then add the packages
 ```
@@ -22,7 +22,7 @@ Adding the `[compat]` entries for the test `Project.toml` is suggested, but not 
 We can now run the test suite using the package manager. It's usually a good idea to restart
 Julia and run the command from the default environment:
 ```
-] test JuliaTemplateRepo
+] test AlgamesPlots
 ```
 which should return something similar to this:
 

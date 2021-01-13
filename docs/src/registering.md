@@ -16,7 +16,7 @@ below for your user/organization settings. Add your new repo.
 The version is set by your `Project.toml`. In the example below, the version is `v0.1.0`. By default, most new repositories should be `v0.1.0`.
 
 ```
-name = "JuliaTemplateRepo"
+name = "AlgamesPlots"
 uuid = "bfba84be-7fa7-49e4-96a7-8b4754465918"
 authors = ["Brian Jackson <bjack205@gmail.com>"]
 version = "0.1.0"
