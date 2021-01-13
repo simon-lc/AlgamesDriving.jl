@@ -10,7 +10,7 @@ This section will detail how to get code coverage reports via
 
 3. In codecov.io, select the parent organization or account and select "Add new repository".
     If your repo doesn't show up, you can navigate directly to it in the URL bar, e.g.
-    https://codecov.io/gh/bjack205/AlgamesPlots.jl.
+    https://codecov.io/gh/simon-lc/AlgamesPlots.jl.
 
 4. Copy the codecov token
     ![cc_copytoken](images/codecov_copytoken.png)

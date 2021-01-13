@@ -18,7 +18,7 @@ The version is set by your `Project.toml`. In the example below, the version is 
 ```
 name = "AlgamesPlots"
 uuid = "bfba84be-7fa7-49e4-96a7-8b4754465918"
-authors = ["Brian Jackson <bjack205@gmail.com>"]
+authors = ["Brian Jackson <simon-lc@gmail.com>"]
 version = "0.1.0"
 
 [deps]

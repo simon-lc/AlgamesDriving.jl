@@ -29,7 +29,7 @@ This is a summary of the instructions in the [Julia Pkg manual](https://julialan
         git init
         git add -A
         git commit -m "first commit"
-        git remote add origin https://github.com/bjack205/AlgamesPlots.jl.git
+        git remote add origin https://github.com/simon-lc/AlgamesPlots.jl.git
         git push -u origin master
 
 6. (optional) Delete local files and add to Julia `dev` folder
@@ -39,7 +39,7 @@ This is a summary of the instructions in the [Julia Pkg manual](https://julialan
 
     Run Julia from your terminal and dev the package:
 
-        ] dev https://github.com/bjack205/AlgamesPlots.jl.git
+        ] dev https://github.com/simon-lc/AlgamesPlots.jl.git
 
     Alternatively, you can link to your local repository if you didn't delete it:
 

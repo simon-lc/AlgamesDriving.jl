@@ -24,7 +24,7 @@ If we open our `Project.toml` file we should now see our packages under the `[de
 ```
 name = "AlgamesPlots"
 uuid = "bfba84be-7fa7-49e4-96a7-8b4754465918"
-authors = ["Brian Jackson <bjack205@gmail.com>"]
+authors = ["Brian Jackson <simon-lc@gmail.com>"]
 version = "0.1.0"
 
 [deps]
@@ -53,7 +53,7 @@ We add this compatibility requirement, along with our required Julia version, to
 ```
 name = "AlgamesPlots"
 uuid = "bfba84be-7fa7-49e4-96a7-8b4754465918"
-authors = ["Brian Jackson <bjack205@gmail.com>"]
+authors = ["Brian Jackson <simon-lc@gmail.com>"]
 version = "0.1.0"
 
 [deps]

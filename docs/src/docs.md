@@ -23,7 +23,7 @@ in the documentation for that package.
         # See "Hosting Documentation" and deploydocs() in the Documenter manual
         # for more information.
         deploydocs(
-            repo = "github.com/bjack205/AlgamesPlots.jl.git",
+            repo = "github.com/simon-lc/AlgamesPlots.jl.git",
         )
 
 3. Add documentation files to `docs/src`. Once the files are in `docs/src`, add them to
@@ -55,11 +55,11 @@ in the documentation for that package.
 
 5. Add a GitHub Action to build your documentation. Create a new GitHub action
     (called `Documenter.yml`) and paste the code found
-    [here](https://github.com/bjack205/AlgamesPlots.jl/blob/master/.github/workflows/Documenter.yml):
+    [here](https://github.com/simon-lc/AlgamesPlots.jl/blob/master/.github/workflows/Documenter.yml):
 
 6. Add Documentation badge to README. Add the following line to the top of the file,
     replacing the user/organize and repo names in the url:
-    `[![](https://img.shields.io/badge/docs-dev-blue.svg)](https://bjack205.github.io/AlgamesPlots.jl/dev)`
+    `[![](https://img.shields.io/badge/docs-dev-blue.svg)](https://simon-lc.github.io/AlgamesPlots.jl/dev)`
 
 ## Writing Docstrings
 As stated in the [Julia manual](https://docs.julialang.org/en/v1/manual/documentation/),
