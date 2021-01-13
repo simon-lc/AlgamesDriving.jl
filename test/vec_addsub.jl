@@ -55,7 +55,7 @@
 
     # Test greet
     f = open("out", create=true, read=true, write=true)
-    redirect_stdout(JuliaTemplateRepo.greet, f)
+    redirect_stdout(AlgamesPlots.greet, f)
     seekstart(f)
     @test readline(f) == "Hello World!"
     close(f)

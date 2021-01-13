@@ -1,5 +1,5 @@
 using Test
-using JuliaTemplateRepo
+using AlgamesPlots
 using StaticArrays
 using LinearAlgebra
 
