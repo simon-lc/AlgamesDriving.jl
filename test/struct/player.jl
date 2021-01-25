@@ -1,0 +1,21 @@
+@testset "Player" begin
+
+    # Test Player
+    T = Float64
+    p = 3
+    model = UnicycleGame(p=p)
+    x0 = @SVector [1.0, 2.0, 3.0, 4.0]
+    lane_id = 1
+    Q = Diagonal(rand(SVector{model.ni[1],T}))
+    R = Diagonal(rand(SVector{model.mi[1],T}))
+    xf = rand(SVector{model.ni[1],T})
+    uf = rand(SVector{model.mi[1],T})
+    u_min = rand(SVector{model.mi[1],T})
+    u_max = rand(SVector{model.mi[1],T})
+    r_col = 1.0
+    r_cost = 1.0
+    μ = 1.0
+    player = Player(x0, lane_id, Q, R, xf, uf, u_min, u_max, r_col, r_cost, μ)
+    typeof(player) <: Player
+
+end
