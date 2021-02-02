@@ -12,7 +12,7 @@ Pkg.add("AlgamesDriving")
 ## Related Paper
 [RSS 2020](http://www.roboticsproceedings.org/rss16/p091.pdf)
 
-## Autonomous Robots paper submission: 
+## Autonomous Robots paper submission:
 The experiments are available [here](https://github.com/simon-lc/AlgamesDriving.jl/releases/tag/autonomous_robots_v1.0).
 
 ## Quick Start
@@ -73,3 +73,4 @@ set_env!(vis, VehicleState(2.,0.,0.,0.))
 set_traj!(vis, model, sce, prob.pdtraj.pr)
 
 ```
+![alt text](https://github.com/simon-lc/Algames.jl/blob/master/readme_banner.jpeg?raw=true)

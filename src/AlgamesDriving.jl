@@ -107,7 +107,7 @@ export
 # Plots
 export
     plot_traj_!,
-    plot_violation!_!,
+    plot_violation_!,
     plot_epochs_!
 
 
