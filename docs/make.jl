@@ -1,8 +1,8 @@
 using Documenter
-using AlgamesPlots  # your package name here
+using AlgamesDriving  # your package name here
 
 makedocs(
-    sitename = "AlgamesPlots",  # your package name here
+    sitename = "AlgamesDriving",  # your package name here
     format = Documenter.HTML(prettyurls = false),  # optional
     pages = [
         "Introduction" => "index.md",
@@ -20,5 +20,5 @@ makedocs(
 )
 
 deploydocs(
-    repo = "github.com/simon-lc/AlgamesPlots.jl.git",
+    repo = "github.com/simon-lc/AlgamesDriving.jl.git",
 )

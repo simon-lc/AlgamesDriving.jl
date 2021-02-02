@@ -5,8 +5,8 @@ Here are a few additional GitHub actions that you may find useful.
 Automatically creates tags/releases in your GitHub repo when you register
 a release with the Julia general registry. Create a new action and copy
 the contents of
-[this file](https://github.com/simon-lc/AlgamesPlots.jl/blob/master/.github/workflows/TagBot.yml).
+[this file](https://github.com/simon-lc/AlgamesDriving.jl/blob/master/.github/workflows/TagBot.yml).
 
 ## CompatHelper
 Creates a new PR whenever one of your dependencies releases a new version. Create a new action
-and copy the contents of [this file](https://github.com/simon-lc/AlgamesPlots.jl/blob/master/.github/workflows/CompatHelper.yml).
+and copy the contents of [this file](https://github.com/simon-lc/AlgamesDriving.jl/blob/master/.github/workflows/CompatHelper.yml).

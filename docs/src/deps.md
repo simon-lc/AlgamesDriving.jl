@@ -7,14 +7,14 @@ as dependencies.
 To do this, we need to first activate the `Project.toml` file for our project using the
 package manager:
 ```julia
-] activate /path/to/AlgamesPlots
+] activate /path/to/AlgamesDriving
 ```
 
 Once activated, we add dependencies the exact same way we do normally:
 ```
-(AlgamesPlots) pkg> add StaticArrays
-(AlgamesPlots) pkg> add LinearAlgebra
-(AlgamesPlots) pkg> resolve
+(AlgamesDriving) pkg> add StaticArrays
+(AlgamesDriving) pkg> add LinearAlgebra
+(AlgamesDriving) pkg> resolve
 ```
 
 The last command isn't always needed, but is recommended, since it updates our `Manifest.toml`
@@ -22,7 +22,7 @@ file based on the contents of the `Project.toml` file.
 
 If we open our `Project.toml` file we should now see our packages under the `[deps]` header:
 ```
-name = "AlgamesPlots"
+name = "AlgamesDriving"
 uuid = "bfba84be-7fa7-49e4-96a7-8b4754465918"
 authors = ["Brian Jackson <simon-lc@gmail.com>"]
 version = "0.1.0"
@@ -37,7 +37,7 @@ The easiest---and more conservative---way to determine our compatibility is to r
 the versions to those that are currently being used. We can query this using the package
 manager:
 ```
-(AlgamesPlots) pkg> st
+(AlgamesDriving) pkg> st
 ```
 Which should return something like
 
@@ -51,7 +51,7 @@ We add this compatibility requirement, along with our required Julia version, to
 `[compat]` section of our `Project.toml` file:
 
 ```
-name = "AlgamesPlots"
+name = "AlgamesDriving"
 uuid = "bfba84be-7fa7-49e4-96a7-8b4754465918"
 authors = ["Brian Jackson <simon-lc@gmail.com>"]
 version = "0.1.0"

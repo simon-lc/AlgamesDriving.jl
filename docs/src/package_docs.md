@@ -1,6 +1,6 @@
 # Sample Documentation
 ```@meta
-CurrentModule = AlgamesPlots
+CurrentModule = AlgamesDriving
 ```
 
 This page shows how to pull in the doc strings in your code.
@@ -8,7 +8,7 @@ This page shows how to pull in the doc strings in your code.
 The first thing to do is insert
 ````markdown
 ```@meta
-CurrentModule = AlgamesPlots  # your package name here
+CurrentModule = AlgamesDriving  # your package name here
 ```
 ````
 

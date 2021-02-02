@@ -1,5 +1,5 @@
 using Test
-using AlgamesPlots
+using AlgamesDriving
 using Algames
 using BenchmarkTools
 using Colors

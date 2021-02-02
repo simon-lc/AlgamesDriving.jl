@@ -9,10 +9,10 @@ in the documentation for that package.
     documentation. Here is the basic starting point:
 
         using Documenter
-        using AlgamesPlots  # your package name here
+        using AlgamesDriving  # your package name here
 
         makedocs(
-            sitename = "AlgamesPlots",  # your package name here
+            sitename = "AlgamesDriving",  # your package name here
             format = Documenter.HTML(prettyurls = false),  # optional
             pages = [
                 "Introduction" => "index.md"
@@ -23,7 +23,7 @@ in the documentation for that package.
         # See "Hosting Documentation" and deploydocs() in the Documenter manual
         # for more information.
         deploydocs(
-            repo = "github.com/simon-lc/AlgamesPlots.jl.git",
+            repo = "github.com/simon-lc/AlgamesDriving.jl.git",
         )
 
 3. Add documentation files to `docs/src`. Once the files are in `docs/src`, add them to
@@ -41,8 +41,8 @@ in the documentation for that package.
 4. Add deploy keys for your repo. Install [DocumenterTools.jl](https://github.com/JuliaDocs/DocumenterTools.jl) and enter the following into your REPL
     ```
     using DocumenterTools
-    using AlgamesPlots                     # your package name here
-    DocumenterTools.genkeys(AlgamesPlots)  # your package name here
+    using AlgamesDriving                     # your package name here
+    DocumenterTools.genkeys(AlgamesDriving)  # your package name here
     ```
     Copy the first public key (starts with `ssh-rsa` and ends with ` Documenter`).
     Go to your repository settings in GitHub and select "Deploy Keys". Add the deploy key,
@@ -55,11 +55,11 @@ in the documentation for that package.
 
 5. Add a GitHub Action to build your documentation. Create a new GitHub action
     (called `Documenter.yml`) and paste the code found
-    [here](https://github.com/simon-lc/AlgamesPlots.jl/blob/master/.github/workflows/Documenter.yml):
+    [here](https://github.com/simon-lc/AlgamesDriving.jl/blob/master/.github/workflows/Documenter.yml):
 
 6. Add Documentation badge to README. Add the following line to the top of the file,
     replacing the user/organize and repo names in the url:
-    `[![](https://img.shields.io/badge/docs-dev-blue.svg)](https://simon-lc.github.io/AlgamesPlots.jl/dev)`
+    `[![](https://img.shields.io/badge/docs-dev-blue.svg)](https://simon-lc.github.io/AlgamesDriving.jl/dev)`
 
 ## Writing Docstrings
 As stated in the [Julia manual](https://docs.julialang.org/en/v1/manual/documentation/),

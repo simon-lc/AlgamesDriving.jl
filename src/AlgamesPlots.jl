@@ -1,4 +1,4 @@
-module AlgamesPlots
+module AlgamesDriving
 
 greet() = print("Hello World!")
 

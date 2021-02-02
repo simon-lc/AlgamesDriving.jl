@@ -11,7 +11,7 @@ how to do this with GitHub actions.
 3. Rename the file to `CI.yml`
     ![GHA_rename](images/GHA_rename.png)
 
-4. Paste this [code](https://github.com/simon-lc/AlgamesPlots.jl/blob/master/.github/workflows/CI.yml).
+4. Paste this [code](https://github.com/simon-lc/AlgamesDriving.jl/blob/master/.github/workflows/CI.yml).
     Which runs Julia v1.3 (under `jobs/test/strategy/matrix/version`) on Ubuntu, Mac, and
     Windows (under `jobs/test/strategy/matrix/os`). The steps setup Julia, run the tests,
     and then upload the code coverage results to codecov. This will run on any pull request

@@ -16,31 +16,31 @@ This is a summary of the instructions in the [Julia Pkg manual](https://julialan
 3. In your terminal on your computer, launch Julia. Generate the package files using the
     package manager:
 
-        ] generate AlgamesPlots
+        ] generate AlgamesDriving
 
-    This will generate the `Project.toml` and a `src/AlgamesPlots.jl` files.
+    This will generate the `Project.toml` and a `src/AlgamesDriving.jl` files.
 
 4. Create a `README.md`. Use whatever editor you prefer.
 
 5. Create a git repo, add the remote, and push changes. These instructions are also found
     in the previous image.
 
-        cd AlgamesPlots
+        cd AlgamesDriving
         git init
         git add -A
         git commit -m "first commit"
-        git remote add origin https://github.com/simon-lc/AlgamesPlots.jl.git
+        git remote add origin https://github.com/simon-lc/AlgamesDriving.jl.git
         git push -u origin master
 
 6. (optional) Delete local files and add to Julia `dev` folder
 
         cd ..
-        rm -rf AlgamesPlots
+        rm -rf AlgamesDriving
 
     Run Julia from your terminal and dev the package:
 
-        ] dev https://github.com/simon-lc/AlgamesPlots.jl.git
+        ] dev https://github.com/simon-lc/AlgamesDriving.jl.git
 
     Alternatively, you can link to your local repository if you didn't delete it:
 
-        ] dev /path/to/local/repo/AlgamesPlots
+        ] dev /path/to/local/repo/AlgamesDriving
