@@ -31,7 +31,7 @@ end
 ################################################################################
 
 function set_roadway!(vis::Visualizer, opts::HighwayRoadwayOptions{T};
-    vis_opts::RoadwayVisualizationOptions=RoadwayVisualizationOptions()) where {T}
+    vis_opts::RoadwayVisualizationOptions=RoadwayVisualizationOptions(), k) where {T}
     clean!(vis)
     ll = opts.lane_length
     lw = opts.lane_width
@@ -46,14 +46,14 @@ function set_roadway!(vis::Visualizer, opts::HighwayRoadwayOptions{T};
 	left_bound = Rect3D(Vec(0.0, lw, -ϵ), Vec(ll, bw, ϵ+bh))
     right_bound = Rect3D(Vec(0.0, -lw-bw, -ϵ), Vec(ll, bw, ϵ+bh))
 
-    setobject!(vis["env/roadway"]["road"], road, MeshPhongMaterial(color=vis_opts.road_color))
-	setobject!(vis["env/roadway"]["line"], line, MeshPhongMaterial(color=colorant"yellow"))
-	setobject!(vis["env/roadway"]["left_bound"], left_bound, MeshPhongMaterial(color=vis_opts.bound_color))
-	setobject!(vis["env/roadway"]["right_bound"], right_bound, MeshPhongMaterial(color=vis_opts.bound_color))
+    setobject!(vis["env/roadway$k"]["road"], road, MeshPhongMaterial(color=vis_opts.road_color))
+	setobject!(vis["env/roadway$k"]["line"], line, MeshPhongMaterial(color=colorant"yellow"))
+	setobject!(vis["env/roadway$k"]["left_bound"], left_bound, MeshPhongMaterial(color=vis_opts.bound_color))
+	setobject!(vis["env/roadway$k"]["right_bound"], right_bound, MeshPhongMaterial(color=vis_opts.bound_color))
     return nothing
 end
 
-function set_roadway!(vis::Visualizer, opts::MergingRoadwayOptions111{T};
+function set_roadway!(vis::Visualizer, opts::MergingRoadwayOptions{T};
     vis_opts::RoadwayVisualizationOptions=RoadwayVisualizationOptions()) where {T}
     clean!(vis)
     ll = opts.lane_length
@@ -86,43 +86,3 @@ function set_roadway!(vis::Visualizer, opts::MergingRoadwayOptions111{T};
 	settransform!(vis["env/roadway"]["merging_right_bound"], tr_bound)
 	return nothing
 end
-
-# vis = Visualizer()
-# open(vis)
-
-roadway_opts = MergingRoadwayOptions111()
-roadway = build_roadway(roadway_opts)
-
-set_roadway!(vis, roadway_opts)
-
-
-################################################################################
-# AutoProblem
-################################################################################
-
-# mutable struct AutoProblem{T}
-# 	prob::GameProblem
-# 	sce::Scenario{T}
-# end
-#
-# function AutoProblem(prob::GameProblem, sce::Scenario{T}) where {T}
-# 	return AutoProblem{T}(prob, sce)
-# end
-#
-# function AutoProblem(sce::Scenario{T}) where {T}
-# 	prob = GameProblem(scenario)
-# 	return AutoProblem{T}(prob, sce)
-# end
-#
-#
-# function visualize!(vis::Visualizer, sce::Scenario{T}, traj::Traj) where {T}
-# 	# Visualize a trajectory
-#
-# 	return nothing
-# end
-#
-# function visualize!(vis::Visualizer, sce::Scenario{T}, x::SVx) where {Svx}
-# 	# Visualize a state
-#
-# 	return nothing
-# end

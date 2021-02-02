@@ -22,7 +22,7 @@ function first_order_rollout(traj::Algames.Traj, dt::T) where {T}
 end
 
 function simulate_MPC!(vis::Visualizer, prob::Algames.GameProblem, x0::SVx, sce::Scenario,
-    mpc_stats::MPCStatistics209, mpc_opts::MPCOptions209) where {SVx}
+    mpc_stats::MPCStatistics, mpc_opts::MPCOptions) where {SVx}
     # Initialization
     reset!(mpc_stats)
     prob.x0 = x0

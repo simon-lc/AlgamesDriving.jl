@@ -14,15 +14,9 @@ using MeshIO
 using Parameters
 using Plots
 using REPL
+using Random
 using Rotations
 using StaticArrays
-using TrajOptPlots
-
-
-export
-    vec_add!,
-    vec_sub!,
-    VecPair
 
 # Struct
 # vehicle_state
@@ -43,6 +37,7 @@ export
     Roadway,
     RoadwayOptions,
     HighwayRoadwayOptions,
+    MergingRoadwayOptions,
     build_roadway,
     add_lane!
 # player
@@ -63,9 +58,53 @@ export
     visualize_roadway!
 # visualization_methods
 export
-    clean!
+    clean!,
+    ModifiedMeshFileObject,
+    rescale_contents,
+    select_material,
+    transRot
+# Camera
+export
+    set_env!,
+    set_camera!,
+    set_camera_birdseye!
+# visualize_player
+export
+    PlayerVisualizationOptions,
+    WaypointVisualizationOptions,
+    LineVisualizationOptions,
+    set_player!,
+    build_waypoint!,
+    set_line_traj!
+# visualize_roadway
+export
+    RoadwayVisualizationOptions,
+    set_roadway!
+# visualize_scenario
+export
+    set_scenario!
+# visualize_trajectory
+export
+    set_state!,
+    set_traj!,
+    set_waypoint!,
+    set_waypoint_traj!
 
-include("newcode.jl")
+# MPC
+# Game
+export
+    get_char
+# mpc_struct
+export
+    MPCOptions,
+    MPCStatistics,
+    TrajStatistics
+# mpc_methods
+export
+    first_order_rollout,
+    simulate_MPC!
+
+
 
 # Struct
 include("struct/vehicle_state.jl")
@@ -92,6 +131,5 @@ include("mpc/game.jl")
 
 # Plots
 include("plots/solver_plots.jl")
-
 
 end # module

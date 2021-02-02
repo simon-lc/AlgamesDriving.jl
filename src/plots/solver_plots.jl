@@ -2,8 +2,8 @@
 # Trajectory Plot
 ################################################################################
 
-function Algames.plot_traj!(model::AbstractGameModel, traj::Algames.Traj)
-    plt = plot(aspect_ratio=:equal)
+function Algames.plot_traj!(model::AbstractGameModel, traj::Algames.Traj; plt=plot())
+    plot!(plt, legend=false, aspect_ratio=:equal)
     N = length(traj)
     for i = 1:model.p
         xi = [Algames.state(traj[k])[model.pz[i][1]] for k=1:N]
@@ -19,8 +19,8 @@ end
 # Constraint Violation Plot
 ################################################################################
 
-function Algames.plot_violation!(stats::Statistics; lw::T=5.0) where {T}
-	plt = plot(
+function Algames.plot_violation!(stats::Statistics; plt=plot(), lw::T=5.0) where {T}
+	plot!(plt,
 		size=(500,500),
 		layout=(1,1,))
     iter = stats.iter

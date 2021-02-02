@@ -5,7 +5,7 @@ mutable struct Scenario{T}
     player::Vector{Player{T}}
 end
 
-function Scenario(model::AbstractGameModel, roadway::Roadway{T}, players::Vector{Player{T}}) where {T}
+function Scenario(model::AbstractGameModel, roadway::Roadway{T}, players::Vector{<:Player}) where {T}
     p = model.p
     @assert p == length(players)
     sort!(players, by = x -> x.id)
@@ -68,6 +68,8 @@ end
 
 function GameConstraintValues(N::Int, sce::Scenario{T}) where {T}
     model = sce.model
+    roadway = sce.roadway
+    p = model.p
     probsize = ProblemSize(N,model)
     game_con = Algames.GameConstraintValues(probsize)
 
@@ -113,29 +115,3 @@ function GameProblem(N::Int, dt::T, sce::Scenario{T}, opts::Options{T}) where {T
     prob = Algames.GameProblem(N, dt, x0, sce.model, opts, game_obj, game_con)
     return prob
 end
-
-
-#
-# function build_highway_scenario(p::Int, roadway_dims::, )
-#     return scenario
-# end
-#
-# function build_in_ramp_scenario(p::Int, roadway_dims::, )
-#     return scenario
-# end
-#
-# function build_off_ramp_scenario(p::Int, roadway_dims::, )
-#     return scenario
-# end
-#
-# function build_t_intersection_scenario(p::Int, roadway_dims::, )
-#     return scenario
-# end
-#
-# function build_x_intersection_scenario(p::Int, roadway_dims::, )
-#     return scenario
-# end
-#
-# function build_x_intersection_scenario(p::Int, roadway_dims::, )
-#     return scenario
-# end

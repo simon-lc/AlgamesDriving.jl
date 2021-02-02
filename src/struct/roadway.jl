@@ -67,9 +67,9 @@ function build_roadway(opts::HighwayRoadwayOptions{T}) where {T}
 	w4 = Wall(x5, x6, -v)
 
 	# Centerlines
-	f_left(s)  = VehicleState(s,  lw/2, 0., 0.)
-	f_right(s) = VehicleState(s, -lw/2, 0., 0.)
-	f_both(s)  = VehicleState(s, -lw/2, 0., 0.)
+	f_left(s,v=0.)  = VehicleState(s,  lw/2, 0., v)
+	f_right(s,v=0.) = VehicleState(s, -lw/2, 0., v)
+	f_both(s,v=0.)  = VehicleState(s, -lw/2, 0., v)
 
 	# Left lane
 	left_lane = Lane(1,
@@ -116,10 +116,10 @@ function build_roadway(opts::HighwayRoadwayOptions{T}) where {T}
 end
 
 ################################################################################
-# MergingRoadwayOptions111
+# MergingRoadwayOptions
 ################################################################################
 
-@with_kw mutable struct MergingRoadwayOptions111{T} <: RoadwayOptions
+@with_kw mutable struct MergingRoadwayOptions{T} <: RoadwayOptions
     # Options
 	"Length of the lanes."
 	lane_length::T=6.0
@@ -128,13 +128,13 @@ end
 	lane_width::T=0.20
 
 	"Position of the incoming lane merging point."
-	merging_point::T=2.0
+	merging_point::T=1.2
 
 	"Orientation of the incoming lane."
 	merging_angle::T=pi/12
 end
 
-function build_roadway(opts::MergingRoadwayOptions111{T}) where {T}
+function build_roadway(opts::MergingRoadwayOptions{T}) where {T}
 	ll = opts.lane_length
 	lw = opts.lane_width
 	mp = opts.merging_point
@@ -181,28 +181,28 @@ function build_roadway(opts::MergingRoadwayOptions111{T}) where {T}
 	w9 = Wall(x8, x6,   -v)
 
 	# Centerlines
-	f_straight_left(s)  = VehicleState(s,  lw/2, 0., 0.)
-	f_straight_right(s) = VehicleState(s, -lw/2, 0., 0.)
-	f_straight_both(s)  = VehicleState(s, -lw/2, 0., 0.)
-	function f_merging_left(s)
-		if s <= mp+lw*sin(θ)
-			return VehicleState(mp+lw/2*tan(θ)-(mp-s)*cos(θ), -lw/2-(mp-s)*sin(θ), θ, 0.)
+	f_straight_left(s,v=0.)  = VehicleState(s,  lw/2, 0., v)
+	f_straight_right(s,v=0.) = VehicleState(s, -lw/2, 0., v)
+	f_straight_both(s,v=0.)  = VehicleState(s, -lw/2, 0., v)
+	function f_merging_left(s,v=0.)
+		if s <= mp
+			return VehicleState(mp+3lw/2*tan(θ)-(mp-s)*cos(θ), lw/2-(mp-s)*sin(θ), θ, v)
 		else
-			return VehicleState(lw/2*tan(θ)+s,  lw/2, 0., 0.)
+			return VehicleState(3lw/2*tan(θ)+s,  lw/2, 0., v)
 		end
 	end
-	function f_merging_right(s)
+	function f_merging_right(s,v=0.)
 		if s <= mp
-			return VehicleState(mp+lw/2*tan(θ)-(mp-s)*cos(θ), -lw/2-(mp-s)*sin(θ), θ, 0.)
+			return VehicleState(mp+lw/2*tan(θ)-(mp-s)*cos(θ), -lw/2-(mp-s)*sin(θ), θ, v)
 		else
-			return VehicleState(lw/2*tan(θ)+s, -lw/2, 0., 0.)
+			return VehicleState(lw/2*tan(θ)+s, -lw/2, 0., v)
 		end
 	end
-	function f_merging_both(s)
+	function f_merging_both(s,v=0.)
 		if s <= mp
-			return VehicleState(mp+lw/2*tan(θ)-(mp-s)*cos(θ), -lw/2-(mp-s)*sin(θ), θ, 0.)
+			return VehicleState(mp+lw/2*tan(θ)-(mp-s)*cos(θ), -lw/2-(mp-s)*sin(θ), θ, v)
 		else
-			return VehicleState(lw/2*tan(θ)+s, -lw/2, 0., 0.)
+			return VehicleState(lw/2*tan(θ)+s, -lw/2, 0., v)
 		end
 	end
 
@@ -247,7 +247,7 @@ function build_roadway(opts::MergingRoadwayOptions111{T}) where {T}
 					 )
 
  	# Merging Left lane
- 	merging_left_lane = Lane(1,
+ 	merging_left_lane = Lane(4,
  					 :merging_left_lane,
 					 [w1,w5,w7,w8],
  					 Vector{Circle}(),
@@ -260,7 +260,7 @@ function build_roadway(opts::MergingRoadwayOptions111{T}) where {T}
  					 )
 
  	# Merging Right lane
- 	merging_right_lane = Lane(2,
+ 	merging_right_lane = Lane(5,
  					  :merging_right_lane,
 					  [w3,w5,w6,w9],
  					  Vector{Circle}(),
@@ -273,7 +273,7 @@ function build_roadway(opts::MergingRoadwayOptions111{T}) where {T}
  					  )
 
  	# Merging Both lane
- 	merging_both_lane = Lane(3,
+ 	merging_both_lane = Lane(6,
  					 :merging_both_lane,
 					 [w1,w5,w6,w9],
  					 Vector{Circle}(),

@@ -1,4 +1,3 @@
-
 function clean!(vis::Visualizer)
     delete!(vis["/Grid"])
     delete!(vis["/Axes"])

@@ -12,3 +12,14 @@ end
 function set_camera!(vis)
     settransform!(vis["/Cameras/default"], Translation(-0.70, 0.0, 0.04))
 end
+
+function set_camera_birdseye!(vis; height::T=7.0) where {T}
+    t = Translation(0.0, 0.0, height)
+    r = compose(
+        LinearMap(AngleAxis(pi/2, 0, 0, 1)),
+        LinearMap(AngleAxis(1.0*pi, 0, 1, 0)))
+    tr = compose(t,r)
+    settransform!(vis["/Cameras/default"], tr)
+    setprop!(vis["/Cameras/default/rotated/<object>"], "zoom", 5.0)
+    return nothing
+end

@@ -7,30 +7,16 @@ uuid = "79e6a3ab-5dfb-504d-930d-738a2a938a0e"
 version = "2.4.0"
 
 [[Algames]]
-deps = ["Altro", "Arpack", "BenchmarkTools", "ForwardDiff", "LinearAlgebra", "Parameters", "Plots", "Printf", "Random", "RobotDynamics", "SparseArrays", "StaticArrays", "TrajectoryOptimization"]
-git-tree-sha1 = "cc7a213c2fdaad6cfcae8d2ed64fef71c381f30f"
-repo-rev = "master"
-repo-url = "https://github.com/simon-lc/Algames.jl"
+deps = ["Altro", "BenchmarkTools", "ForwardDiff", "LinearAlgebra", "Parameters", "Printf", "Random", "RobotDynamics", "SparseArrays", "StaticArrays", "TrajectoryOptimization"]
+git-tree-sha1 = "9cdf9cec0afe22c07c87de61606c84468c2bb1de"
 uuid = "4a64a370-b39e-4988-9b44-fc3fb6d78c25"
-version = "0.1.1"
+version = "0.1.2"
 
 [[Altro]]
 deps = ["BenchmarkTools", "Crayons", "DocStringExtensions", "Interpolations", "LinearAlgebra", "Logging", "Parameters", "RobotDynamics", "RobotZoo", "Rotations", "SolverLogging", "SparseArrays", "StaticArrays", "Statistics", "TimerOutputs", "TrajectoryOptimization", "UnsafeArrays"]
 git-tree-sha1 = "3616f09f93bc28287d3688e7c240470685b0f27b"
 uuid = "5dcf52e5-e2fb-48e0-b826-96f46d2e3e73"
 version = "0.3.0"
-
-[[Arpack]]
-deps = ["Arpack_jll", "Libdl", "LinearAlgebra", "Logging"]
-git-tree-sha1 = "288d58589d4249a63095f3f41ece91bf34c32c19"
-uuid = "7d9fca2a-8960-54d3-9f78-7d1dccf2cb97"
-version = "0.5.0"
-
-[[Arpack_jll]]
-deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "OpenBLAS_jll", "Pkg"]
-git-tree-sha1 = "4c31b0101997beb213a9e6c39116b052e73ca38c"
-uuid = "68821587-b530-5797-8361-c406ea357684"
-version = "3.8.0+0"
 
 [[ArrayInterface]]
 deps = ["LinearAlgebra", "Requires", "SparseArrays"]
@@ -485,21 +471,15 @@ version = "0.3.3"
 
 [[OffsetArrays]]
 deps = ["Adapt"]
-git-tree-sha1 = "6247fe4b373b354b9b7fc155ae9c137267c9a07f"
+git-tree-sha1 = "8fe8860da7427b10b996deaf1c8b9a7e96c00d05"
 uuid = "6fe1bfb0-de20-5000-8ca7-80f57d26f881"
-version = "1.5.1"
+version = "1.5.2"
 
 [[Ogg_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "a42c0f138b9ebe8b58eba2271c5053773bde52d0"
 uuid = "e7412a2a-1a6e-54c0-be00-318e2571c051"
 version = "1.3.4+2"
-
-[[OpenBLAS_jll]]
-deps = ["CompilerSupportLibraries_jll", "Libdl", "Pkg"]
-git-tree-sha1 = "0c922fd9634e358622e333fc58de61f05a048492"
-uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.9+5"
 
 [[OpenSSL_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -712,12 +692,6 @@ deps = ["Printf"]
 git-tree-sha1 = "3318281dd4121ecf9713ce1383b9ace7d7476fdd"
 uuid = "a759f4b9-e2f1-59dc-863e-4aeb61b1ea8f"
 version = "0.5.7"
-
-[[TrajOptPlots]]
-deps = ["Colors", "CoordinateTransformations", "FileIO", "GeometryBasics", "MeshCat", "MeshIO", "Printf", "RecipesBase", "RobotDynamics", "RobotZoo", "Rotations", "StaticArrays", "TrajectoryOptimization"]
-git-tree-sha1 = "e2e597ce242c313f6ee56020b0e313acb6fd6df6"
-uuid = "7770976a-8dee-4930-bf39-a1782fd21ce6"
-version = "0.1.0"
 
 [[TrajectoryOptimization]]
 deps = ["DocStringExtensions", "ForwardDiff", "LinearAlgebra", "MathOptInterface", "RobotDynamics", "Rotations", "SparseArrays", "StaticArrays", "UnsafeArrays"]

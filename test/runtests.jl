@@ -1,15 +1,20 @@
 using Test
 using AlgamesPlots
+using Algames
+using BenchmarkTools
 using Colors
+using CoordinateTransformations
+using FileIO
 using GeometryBasics
 using LinearAlgebra
 using MeshCat
+using MeshIO
 using Parameters
+using Plots
 using REPL
+using Random
+using Rotations
 using StaticArrays
-
-include("vec_addsub.jl")
-include("VecPair.jl")
 
 #Struct
 include("struct/vehicle_state.jl")
@@ -20,3 +25,10 @@ include("struct/player.jl")
 
 # Scenario
 include("scenario/scenario.jl")
+
+# Visualization
+include("visualization/camera.jl")
+
+# MPC
+include("mpc/mpc_struct.jl")
+include("mpc/mpc_methods.jl")

@@ -54,7 +54,7 @@ set_camera!(vis)
 
 
 function simulate_game!(vis::Visualizer, prob::Algames.GameProblem, x0::SVx, sce::Scenario{T},
-    player_id::Int, mpc_stats::MPCStatistics209, mpc_opts::MPCOptions209) where {T,SVx}
+    player_id::Int, mpc_stats::MPCStatistics, mpc_opts::MPCOptions) where {T,SVx}
 	N = prob.probsize.N
 	m = prob.probsize.m
 	pu = prob.probsize.pu
@@ -133,8 +133,8 @@ function simulate_game!(vis::Visualizer, prob::Algames.GameProblem, x0::SVx, sce
 end
 
 
-mpc_stats = MPCStatistics209()
-mpc_opts = MPCOptions209(h=50.0, M=100000)
+mpc_stats = MPCStatistics()
+mpc_opts = MPCOptions(h=50.0, M=100000)
 # simulate_MPC!(vis, prob, get_state(sce), sce, mpc_stats, mpc_opts)
 
 
