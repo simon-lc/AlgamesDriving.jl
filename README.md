@@ -4,3 +4,4 @@
 
 Plotting and Visualization tools for Algames.jl
 
+Autonomous Robots submission: the experiments are available here https://github.com/simon-lc/AlgamesPlots.jl/releases/tag/autonomous_robots_v1.0
