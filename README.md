@@ -9,12 +9,18 @@ A set of tools to quickly generate and visualize autonomous driving scenarios fo
 ```
 Pkg.add("AlgamesDriving")
 ```
+## Related Paper
+[RSS 2020](http://www.roboticsproceedings.org/rss16/p091.pdf)
 
-## Autonomous Robots submission: 
+## Autonomous Robots paper submission: 
 The experiments are available [here](https://github.com/simon-lc/AlgamesDriving.jl/releases/tag/autonomous_robots_v1.0).
 
 ## Quick Start
 To run a simple example of a autonomous driving see script in /examples/intro_example.jl.
+
+
+
+## Starter Code
 Generate Autonomous Driving Scenario
 ```
 # Create Roadway
