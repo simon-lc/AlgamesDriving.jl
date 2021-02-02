@@ -6,11 +6,11 @@ roadway_opts = HighwayRoadwayOptions()
 roadway = build_roadway(roadway_opts)
 
 # Create players
-T = Float64
+# T = Float64
 p = 3
 model = UnicycleGame(p=p)
 
-players = Vector{Player{T}}(undef, p)
+players = Vector{Player}(undef, p)
 players[1] = Player(model, roadway.lane[1],
     x0=VehicleState(0.0, 0.1, 0.0, 0.3),
     xf=VehicleState(4.0, 0.1, 0.0, 0.3))

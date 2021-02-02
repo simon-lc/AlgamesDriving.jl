@@ -30,7 +30,7 @@ export
     randstate
 # lane
 export
-    Circle,
+    CircularWall,
     Lane
 # roadway
 export
