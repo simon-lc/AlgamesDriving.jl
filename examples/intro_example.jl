@@ -1,3 +1,8 @@
+using AlgamesDriving
+using Algames
+using StaticArrays
+using LinearAlgebra
+
 # Generate Autonomous Driving Scenario
 
 # Create Roadway
