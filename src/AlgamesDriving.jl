@@ -12,7 +12,6 @@ using LinearAlgebra
 using MeshCat
 using MeshIO
 using Parameters
-using Plots
 using REPL
 using Random
 using Rotations
