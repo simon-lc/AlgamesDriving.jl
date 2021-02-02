@@ -104,6 +104,11 @@ export
     first_order_rollout,
     simulate_MPC!
 
+# Plots
+export
+    plot_traj_!,
+    plot_violation!_!,
+    plot_epochs_!
 
 
 # Struct

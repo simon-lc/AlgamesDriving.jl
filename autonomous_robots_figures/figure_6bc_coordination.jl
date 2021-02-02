@@ -84,8 +84,8 @@ prob = Algames.GameProblem(N,dt,x0,model,opts,game_obj,game_con)
 # Solve the problem
 newton_solve!(prob)
 
-plot_traj!(prob.model, prob.pdtraj.pr)
-plot_violation!(prob.stats)
+plot_traj_!(prob.model, prob.pdtraj.pr)
+plot_violation_!(prob.stats)
 
 
 # Initialize visualizers

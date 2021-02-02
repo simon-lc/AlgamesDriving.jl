@@ -15,7 +15,7 @@ function Roadway(lanes::Vector{Lane{T}}, opts::RoadwayOptions) where {T}
     l = length(lanes)
     sort!(lanes, by = x -> x.id)
     if [lanes[i].id for i=1:l] != (1:l)
-        @show "Reindexing the lanes"
+        # @show "Reindexing the lanes"
         for i = 1:l
             lanes[i].id = i
         end
@@ -75,7 +75,7 @@ function build_roadway(opts::HighwayRoadwayOptions{T}) where {T}
 	left_lane = Lane(1,
 					 :left_lane,
 					 [w1,w2],
-					 Vector{Circle}(),
+					 Vector{AlgamesPlots.Circle}(),
 					 StartingArea(
 						 VehicleState(0.,  lw/2, 0.0,  0.00),
 						 VehicleState(0.,  lw/2, 0.0, -0.05),
@@ -88,7 +88,7 @@ function build_roadway(opts::HighwayRoadwayOptions{T}) where {T}
 	right_lane = Lane(2,
 					  :right_lane,
 					  [w3,w4],
-					  Vector{Circle}(),
+					  Vector{AlgamesPlots.Circle}(),
 					  StartingArea(
 						  VehicleState(0., -lw/2, 0.0,  0.00),
 						  VehicleState(0., -lw/2, 0.0, -0.05),
@@ -101,7 +101,7 @@ function build_roadway(opts::HighwayRoadwayOptions{T}) where {T}
 	both_lane = Lane(3,
 					 :both_lane,
 					 [w1,w4],
-					 Vector{Circle}(),
+					 Vector{AlgamesPlots.Circle}(),
 					 StartingArea(
 						 VehicleState(0., -lw/2, 0.0,  0.00),
 						 VehicleState(0., -lw/2, 0.0, -0.05),
@@ -211,7 +211,7 @@ function build_roadway(opts::MergingRoadwayOptions{T}) where {T}
 	straight_left_lane = Lane(1,
 					 :straight_left_lane,
 					 [w1,w2],
-					 Vector{Circle}(),
+					 Vector{AlgamesPlots.Circle}(),
 					 StartingArea(
 						 VehicleState(0.,  lw/2, 0.0,  0.00),
 						 VehicleState(0.,  lw/2, 0.0, -0.05),
@@ -224,7 +224,7 @@ function build_roadway(opts::MergingRoadwayOptions{T}) where {T}
 	straight_right_lane = Lane(2,
 					  :straight_right_lane,
 					  [w3,w4],
-					  Vector{Circle}(),
+					  Vector{AlgamesPlots.Circle}(),
 					  StartingArea(
 						  VehicleState(0., -lw/2, 0.0,  0.00),
 						  VehicleState(0., -lw/2, 0.0, -0.05),
@@ -237,7 +237,7 @@ function build_roadway(opts::MergingRoadwayOptions{T}) where {T}
 	straight_both_lane = Lane(3,
 					 :straight_both_lane,
 					 [w1,w4],
-					 Vector{Circle}(),
+					 Vector{AlgamesPlots.Circle}(),
 					 StartingArea(
 						 VehicleState(0., -lw/2, 0.0,  0.00),
 						 VehicleState(0., -lw/2, 0.0, -0.05),
@@ -250,7 +250,7 @@ function build_roadway(opts::MergingRoadwayOptions{T}) where {T}
  	merging_left_lane = Lane(4,
  					 :merging_left_lane,
 					 [w1,w5,w7,w8],
- 					 Vector{Circle}(),
+ 					 Vector{AlgamesPlots.Circle}(),
  					 StartingArea(
 						 VehicleState(mp+lw/2*tan(θ)-mp*cos(θ), -lw/2-mp*sin(θ), 0.0, θ),
 						 VehicleState(mp+lw/2*tan(θ)-mp*cos(θ), -lw/2-mp*sin(θ), 0.0, θ-0.05),
@@ -263,7 +263,7 @@ function build_roadway(opts::MergingRoadwayOptions{T}) where {T}
  	merging_right_lane = Lane(5,
  					  :merging_right_lane,
 					  [w3,w5,w6,w9],
- 					  Vector{Circle}(),
+ 					  Vector{AlgamesPlots.Circle}(),
  					  StartingArea(
 						  VehicleState(mp+lw/2*tan(θ)-mp*cos(θ), -lw/2-mp*sin(θ), 0.0, θ),
 						  VehicleState(mp+lw/2*tan(θ)-mp*cos(θ), -lw/2-mp*sin(θ), 0.0, θ-0.05),
@@ -276,7 +276,7 @@ function build_roadway(opts::MergingRoadwayOptions{T}) where {T}
  	merging_both_lane = Lane(6,
  					 :merging_both_lane,
 					 [w1,w5,w6,w9],
- 					 Vector{Circle}(),
+ 					 Vector{AlgamesPlots.Circle}(),
  					 StartingArea(
  						 VehicleState(mp+lw/2*tan(θ)-mp*cos(θ), -lw/2-mp*sin(θ), 0.0, θ),
  						 VehicleState(mp+lw/2*tan(θ)-mp*cos(θ), -lw/2-mp*sin(θ), 0.0, θ-0.05),

@@ -17,12 +17,6 @@ mutable struct Player{T,SMQ,SMR,SVx,SVu}
     μ::T           # Amplitude of the collision avoidance cost
 end
 
-function Player(x0::SVx, id::Int, lane_id::Int, Q::SMQ, R::SMR, xf::SVx, uf::SVu,
-    u_min::SVu, u_max::SVu, r_col::T, r_cost::T, μ::T) where {SMQ,SMR,SVx,SVu,T}
-    return Player{T,SMQ,SMR,SVx,SVu}(x0, id, lane_id, Q, R, xf, uf, u_min, u_max, r_col, r_cost, μ)
-end
-
-
 function Player(model::AbstractGameModel, lane::Lane{T};
 				   id::Int=1,
 				   x0::VehicleState=lane.start.x_nom,

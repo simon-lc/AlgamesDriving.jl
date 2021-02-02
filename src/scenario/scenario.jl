@@ -10,7 +10,7 @@ function Scenario(model::AbstractGameModel, roadway::Roadway{T}, players::Vector
     @assert p == length(players)
     sort!(players, by = x -> x.id)
     if [players[i].id for i=1:p] != (1:p)
-        @show "Reindexing the players"
+        # @show "Reindexing the players"
         for i = 1:p
             players[i].id = i
         end
@@ -49,7 +49,7 @@ function get_control_bounds(sce::Scenario{T}) where {T}
     return SVector{m,T}(u_min), SVector{m,T}(u_max)
 end
 
-function GameObjective(N::Int, sce::Scenario{T}) where {T}
+function Algames.GameObjective(N::Int, sce::Scenario{T}) where {T}
     model = sce.model
     n = model.n
     p = model.p
@@ -66,7 +66,7 @@ function GameObjective(N::Int, sce::Scenario{T}) where {T}
     return game_obj
 end
 
-function GameConstraintValues(N::Int, sce::Scenario{T}) where {T}
+function Algames.GameConstraintValues(N::Int, sce::Scenario{T}) where {T}
     model = sce.model
     roadway = sce.roadway
     p = model.p
@@ -108,7 +108,7 @@ function GameConstraintValues(N::Int, sce::Scenario{T}) where {T}
 end
 
 
-function GameProblem(N::Int, dt::T, sce::Scenario{T}, opts::Options{T}) where {T}
+function Algames.GameProblem(N::Int, dt::T, sce::Scenario{T}, opts::Options{T}) where {T}
     x0 = get_state(sce)
     game_obj = GameObjective(N, sce)
     game_con = GameConstraintValues(N, sce)

@@ -627,5 +627,5 @@ end
 # @time newton_solve!(prob)
 # # @profiler newton_solve!(prob)
 #
-# plot_traj!(prob.model, prob.pdtraj.pr)
-# plot_violation!(prob.stats)
+# plot_traj_!(prob.model, prob.pdtraj.pr)
+# plot_violation_!(prob.stats)

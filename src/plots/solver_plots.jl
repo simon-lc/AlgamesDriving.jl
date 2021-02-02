@@ -2,7 +2,7 @@
 # Trajectory Plot
 ################################################################################
 
-function Algames.plot_traj!(model::AbstractGameModel, traj::Algames.Traj; plt=plot())
+function plot_traj_!(model::AbstractGameModel, traj::Algames.Traj; plt=plot())
     plot!(plt, legend=false, aspect_ratio=:equal)
     N = length(traj)
     for i = 1:model.p
@@ -19,7 +19,7 @@ end
 # Constraint Violation Plot
 ################################################################################
 
-function Algames.plot_violation!(stats::Statistics; plt=plot(), lw::T=5.0) where {T}
+function plot_violation_!(stats::Statistics; plt=plot(), lw::T=5.0) where {T}
 	plot!(plt,
 		size=(500,500),
 		layout=(1,1,))
@@ -42,13 +42,13 @@ function Algames.plot_violation!(stats::Statistics; plt=plot(), lw::T=5.0) where
 	plot!(plt[1,1], sta, linewidth=lw, label="sta", legend=:bottomleft)
 	plot!(plt[1,1], opt, linewidth=lw, label="opt", legend=:bottomleft)
 	# Add rectangles
-	Algames.plot_epochs!(plt, y_min, y_max, stats.outer_iter)
+	plot_epochs_!(plt, y_min, y_max, stats.outer_iter)
 
     display(plt)
     return nothing
 end
 
-function Algames.plot_epochs!(plt, y_min::T, y_max::T, epochs::Vector{Int}) where {T}
+function plot_epochs_!(plt, y_min::T, y_max::T, epochs::Vector{Int}) where {T}
 	rectangle(w, h, x, y) = Shape(x .+ [0,w,w,0], y .+ [0,0,h,h])
 	i_start = 1
 	i_end = -1

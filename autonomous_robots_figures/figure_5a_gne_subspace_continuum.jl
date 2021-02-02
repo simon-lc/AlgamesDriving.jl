@@ -67,8 +67,8 @@ prob = Algames.GameProblem(N,dt,x0,model,opts,game_obj,game_con)
 # Solve the problem
 newton_solve!(prob)
 
-plot_traj!(prob.model, prob.pdtraj.pr)
-plot_violation!(prob.stats)
+plot_traj_!(prob.model, prob.pdtraj.pr)
+plot_violation_!(prob.stats)
 
 players = Vector{Player{T}}(undef, p)
 players[1] = Player(model, roadway.lane[3])
@@ -125,7 +125,7 @@ function get_figure(prob::Algames.GameProblem)
 		set_primal_dual!(ascore, prob, xp)
 		push!(pdtrajs, deepcopy(prob.pdtraj))
 
-		plot_traj!(model, prob.pdtraj.pr, plt=plt)
+		plot_traj_!(model, prob.pdtraj.pr, plt=plt)
 		prob_c = deepcopy(prob)
 		set_primal_dual!(ascore, prob_c, x+α*v)
 	end
@@ -133,9 +133,9 @@ function get_figure(prob::Algames.GameProblem)
 
 	plt = plot()
 	set_primal_dual!(ascore, prob, x0)
-	plot_traj!(model, prob.pdtraj.pr, plt=plt)
+	plot_traj_!(model, prob.pdtraj.pr, plt=plt)
 	set_primal_dual!(ascore, prob, x0+100*1e-3*v0)
-	plot_traj!(model, prob.pdtraj.pr, plt=plt)
+	plot_traj_!(model, prob.pdtraj.pr, plt=plt)
 	display(plt)
 
 	return prob, pdtrajs

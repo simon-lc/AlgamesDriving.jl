@@ -90,12 +90,12 @@ function vizz(prob)
         con = mean(abs.(prob.stats.con_vio[end].vio))
         opts = prob.opts
         if opt < opts.ϵ_opt && sta < opts.ϵ_sta && dyn < opts.ϵ_dyn && con < opts.ϵ_con
-            # plot_violation!(prob.stats)
-            # plot_traj!(prob.model, init.pr)
-            plot_traj!(prob.model, sol.pr)
+            # plot_violation_!(prob.stats)
+            # plot_traj_!(prob.model, init.pr)
+            plot_traj_!(prob.model, sol.pr)
             @time set_waypoint_traj!(vis, model, sce, init.pr)
             # sleep(1.0)
-            # plot_traj!(prob.model, prob.pdtraj.pr)
+            # plot_traj_!(prob.model, prob.pdtraj.pr)
             @time set_traj!(vis, model, sce, prob.pdtraj.pr)
             build_waypoint!(vis, sce.player, N, key=k)
             @time set_waypoint_traj!(vis, model, sce, sol.pr, key=k)
@@ -164,4 +164,4 @@ end
 
 figgg(prob)
 
-plot_traj!
+plot_traj_!

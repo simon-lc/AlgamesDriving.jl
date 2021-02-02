@@ -85,8 +85,8 @@ prob = Algames.GameProblem(N,dt,x0,model,opts,game_obj,game_con)
 @time newton_solve!(prob)
 # @profiler newton_solve!(prob)
 
-plot_traj!(prob.model, prob.pdtraj.pr)
-plot_violation!(prob.stats)
+plot_traj_!(prob.model, prob.pdtraj.pr)
+plot_violation_!(prob.stats)
 
 prob.stats.outer_iter
 # kick out of inner loop if not progress made
