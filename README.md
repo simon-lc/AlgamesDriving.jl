@@ -3,10 +3,15 @@
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://simon-lc.github.io/AlgamesDriving.jl/dev)
 
 ## Purpose
-A set of tools to quickly generate and visualize autonomous driving scenarios for Algames.jl. 
+A set of tools to quickly generate and visualize autonomous driving scenarios for [Algames.jl](https://github.com/simon-lc/Algames.jl).
+
+## Installation
+```
+Pkg.add("AlgamesDriving")
+```
 
 ## Autonomous Robots submission: 
-The experiments are available here https://github.com/simon-lc/AlgamesDriving.jl/releases/tag/autonomous_robots_v1.0
+The experiments are available [here](https://github.com/simon-lc/AlgamesDriving.jl/releases/tag/autonomous_robots_v1.0).
 
 ## Starter Code
 Generate Autonomous Driving Scenario
