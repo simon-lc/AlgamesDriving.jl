@@ -13,7 +13,8 @@ Pkg.add("AlgamesDriving")
 ## Autonomous Robots submission: 
 The experiments are available [here](https://github.com/simon-lc/AlgamesDriving.jl/releases/tag/autonomous_robots_v1.0).
 
-## Starter Code
+## Quick Start
+To run a simple example of a autonomous driving see script in /examples/intro_example.jl.
 Generate Autonomous Driving Scenario
 ```
 # Create Roadway
