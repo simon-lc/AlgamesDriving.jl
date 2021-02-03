@@ -73,4 +73,5 @@ set_env!(vis, VehicleState(2.,0.,0.,0.))
 set_traj!(vis, model, sce, prob.pdtraj.pr)
 
 ```
+
 ![alt text](https://github.com/simon-lc/Algames.jl/blob/master/readme_banner.jpeg?raw=true)
