@@ -290,3 +290,142 @@ function build_roadway(opts::MergingRoadwayOptions{T}) where {T}
 	roadway = Roadway(lanes, opts)
     return roadway
 end
+
+
+################################################################################
+# IntersectionRoadwayOptions
+################################################################################
+
+@with_kw mutable struct FourIntersectionRoadwayOptions{T} <: RoadwayOptions
+    # Options
+	"Length of the lanes."
+	lane_length::T=4.0
+
+	"Width of the lanes."
+	lane_width::T=0.4
+end
+
+function build_roadway(opts::FourIntersectionRoadwayOptions{T}) where {T}
+	ll = opts.lane_length
+	lw = opts.lane_width
+	#                  x5      x17       x6
+	#                  |        .        |
+	#                  |        .        |
+	#                  |        .        |
+	#                  |        .        |
+	#                  |        .        |
+	#                  |        .        |
+	# x1_______________|x9     x18      x10_________________x2
+	#
+	#
+	# x13..............x14	  (0,0)     x15.................x16
+	#
+	#
+	# x3_______________x11     x19      x12_________________x4
+	#                  |        .        |
+	#                  |        .        |
+	#                  |        .        |
+	#                  |        .        |
+	#                  |        .        |
+	#                  |        .        |
+	#                  |        .        |
+	#                  x7      x20       x8
+	#
+
+	x1 = [ -ll/2, lw/2]
+	x2 = [ ll/2, lw/2]
+	x3 = [ -ll/2, -lw/2]
+	x4 = [ ll/2, -lw/2]
+	x5 = [ -lw/2, ll/2]
+	x6 = [ lw/2, ll/2]
+	x7 = [ -lw/2, -ll/2]
+	x8 = [ lw/2, -ll/2]
+	x9 = [ -lw/2, lw/2]
+	x10 = [ lw/2, lw/2]
+	x11 = [ -lw/2, -lw/2]
+	x12 = [ lw/2, -lw/2]
+	x13 = [ -ll/2, 0.]
+	x14 = [ -lw/2, 0.]
+	x15 = [ lw/2, 0.]
+	x16 = [ ll/2, 0.]
+	x17 = [ 0., ll/2]
+	x18 = [ 0., lw/2]
+	x19 = [ 0., -lw/2]
+	x20 = [ 0., -ll/2]
+
+	v = [0., 1.]
+    w1 = Wall(x1, x9, v)
+	w2 = Wall(x10, x2, v)
+	w3 = Wall(x3, x11, -v)
+	w4 = Wall(x12, x4, -v)
+	w5 = Wall(x9, x5, -v)
+	w6 = Wall(x7, x11, -v)
+	w7 = Wall(x8, x12, -v)
+	w8 = Wall(x10, x6, -v)
+	w9 = Wall(x13, x14, v)
+	w10 = Wall(x13, x14, -v)
+	w11 = Wall(x15, x16, v)
+	w12 = Wall(x15, x16, -v)
+	w13 = Wall(x18, x17, v)
+	w14 = Wall(x18, x17, -v)
+	w15 = Wall(x20, x19, v)
+	w16 = Wall(x20, x19, -v)
+
+	f_west(s,v=0.)  = VehicleState(s, -lw/4, 0., v)
+	f_east(s,v=0.) = VehicleState(ll/2 - s, lw/4, 3.14, v)
+	f_north(s,v=0.) = VehicleState(-lw/4, s, 4.71, v)
+	f_south(s,v=0.) = VehicleState(lw/4, ll/2 - s, 1.57, v)
+
+	# <start_direction>_lane
+	west_lane = Lane(1,
+					:west_lane,
+					[w3, w4, w9, w11],
+					Vector{CircularWall}(),
+					StartingArea(
+						VehicleState(-0.75*(ll-lw),  -lw/4, 0.0,  0.00),
+						VehicleState(-lw/2, -lw/4, 0.0, -0.05),
+						VehicleState(-ll/2, -lw/4, 0.4,  0.05),
+						),
+					f_west,
+					)
+
+	east_lane = Lane(2,
+					:east_lane,
+					[w1, w2, w10, w12],
+					Vector{CircularWall}(),
+					StartingArea(
+						VehicleState(ll/2, lw/4, 3.14, 0.00),
+						VehicleState(ll/2, lw/4, 3.14,-0.05),
+						VehicleState(ll/2, lw/4, 3.14, 0.05),
+						),
+					f_east,
+					)
+
+	north_lane = Lane(3,
+					:north_lane,
+					[w5, w6, w14, w16],
+					Vector{CircularWall}(),
+					StartingArea(
+						VehicleState(-lw/4, ll/2, 4.71,  0.00),
+						VehicleState(-lw/4, ll/2, 4.71, -0.05),
+						VehicleState(-lw/4, ll/2, 4.71,  0.05),
+						),
+					f_north,
+					)
+
+	south_lane = Lane(4,
+					:south_lane,
+					[w7, w8],
+					Vector{CircularWall}(),
+					StartingArea(
+						VehicleState(lw/4,  -ll/2, 1.57,  0.00),
+						VehicleState(lw/4,  -ll/2, 1.57, -0.05),
+						VehicleState(lw/4,  -ll/2, 1.57,  0.05),
+						),
+					f_south,
+					)
+
+	lanes = [west_lane, east_lane, north_lane, south_lane]
+	roadway = Roadway(lanes, opts)
+	return roadway
+end

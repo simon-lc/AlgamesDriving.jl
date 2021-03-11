@@ -37,6 +37,7 @@ export
     RoadwayOptions,
     HighwayRoadwayOptions,
     MergingRoadwayOptions,
+    FourIntersectionRoadwayOptions,
     build_roadway,
     add_lane!
 # player
