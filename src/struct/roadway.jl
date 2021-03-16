@@ -30,6 +30,24 @@ function add_lane!(roadway::Roadway{T}, lane::Lane{T}) where {T}
     return nothing
 end
 
+function test_centerline_continuity(f; v::T=1.0, s_min::T=-10.0, s_max::T=10.0,
+	sample::Int=2000) where T
+	# plt = scatter(legend=false)
+	out = true
+	step = (s_max - s_min)/sample
+	vs_ = f(s_min,v)
+	vs = f(s_min,v)
+	for k = 1:sample
+		s = s_min + k*step
+		vs = f(s,v)
+		out &= norm([vs.x, vs.y] - [vs_.x, vs_.y]) <= (step + 1e-5)
+		vs_ = vs
+		# scatter!([vs.x], [vs.y])
+	end
+	# display(plt)
+	return out
+end
+
 ################################################################################
 # HighwayRoadwayOptions
 ################################################################################
@@ -303,27 +321,31 @@ end
 
 	"Width of the lanes."
 	lane_width::T=0.4
+
+	"Turn radius."
+	turn_radius::T=0.1
 end
 
 function build_roadway(opts::FourIntersectionRoadwayOptions{T}) where {T}
 	ll = opts.lane_length
 	lw = opts.lane_width
+	tr = opts.turn_radius
 	#                  x5      x17       x6
 	#                  |        .        |
 	#                  |        .        |
 	#                  |        .        |
 	#                  |        .        |
+	#            x29   x25      .        x26  x30
 	#                  |        .        |
-	#                  |        .        |
-	# x1_______________|x9     x18      x10_________________x2
+	# x1_________x21___|x9     x18      x10___x22___________x2
+	#
+	#                         (0,0)
+	# x13..............x14	   x21     x15.................x16
 	#
 	#
-	# x13..............x14	  (0,0)     x15.................x16
-	#
-	#
-	# x3_______________x11     x19      x12_________________x4
+	# x3_________x23___x11     x19      x12___x24___________x4
 	#                  |        .        |
-	#                  |        .        |
+	#            x31   x27        .      x28  x32
 	#                  |        .        |
 	#                  |        .        |
 	#                  |        .        |
@@ -353,40 +375,113 @@ function build_roadway(opts::FourIntersectionRoadwayOptions{T}) where {T}
 	x19 = [ 0., -lw/2]
 	x20 = [ 0., -ll/2]
 
+	x21 = [-lw/2 - tr, +lw/2]
+	x22 = [+lw/2 + tr, +lw/2]
+	x23 = [-lw/2 - tr, -lw/2]
+	x24 = [+lw/2 + tr, -lw/2]
+	x25 = [-lw/2, +lw/2 + tr]
+	x26 = [+lw/2, +lw/2 + tr]
+	x27 = [-lw/2, -lw/2 - tr]
+	x28 = [+lw/2, -lw/2 - tr]
+	x29 = [-lw/2 - tr, +lw/2 + tr]
+	x30 = [+lw/2 + tr, +lw/2 + tr]
+	x31 = [-lw/2 - tr, -lw/2 - tr]
+	x32 = [+lw/2 + tr, -lw/2 - tr]
+
 	v = [0., 1.]
+	w = [1., 0.]
     w1 = Wall(x1, x9, v)
 	w2 = Wall(x10, x2, v)
 	w3 = Wall(x3, x11, -v)
 	w4 = Wall(x12, x4, -v)
-	w5 = Wall(x9, x5, -v)
-	w6 = Wall(x7, x11, -v)
-	w7 = Wall(x8, x12, -v)
-	w8 = Wall(x10, x6, -v)
+	w5 = Wall(x9, x5, -w)
+	w6 = Wall(x7, x11, -w)
+	w7 = Wall(x8, x12,  w)
+	w8 = Wall(x10, x6,  w)
 	w9 = Wall(x13, x14, v)
 	w10 = Wall(x13, x14, -v)
-	w11 = Wall(x15, x16, v)
+	w11 = Wall(x15, x16,  v)
 	w12 = Wall(x15, x16, -v)
-	w13 = Wall(x18, x17, v)
-	w14 = Wall(x18, x17, -v)
-	w15 = Wall(x20, x19, v)
-	w16 = Wall(x20, x19, -v)
+	w13 = Wall(x18, x17, -w)
+	w14 = Wall(x18, x17,  w)
+	w15 = Wall(x20, x19, -w)
+	w16 = Wall(x20, x19,  w)
 
-	f_west(s,v=0.)  = VehicleState(s, -lw/4, 0., v)
+	# West
+	trv = [tr, 0]
+	trw = [0, tr]
+	w101  = Wall(x3,  x4,  -v)
+	w102  = Wall(x13, x16,  v)
+
+	w103  = Wall(x3,  x23, -v)
+	w104  = Wall(x13, x21,  v)
+	w105  = Wall(x7,  x27, -w)
+	w106  = Wall(x20, x21,  w)
+	c107  = CircularWall(x31..., tr)
+
+	w108  = Wall(x3,  x12, -v)
+	w109  = Wall(x13, x21-trw,  v)
+	w110  = Wall(x17, x21+trv, -w)
+	w111  = Wall(x6 , x12,  w)
+	c112  = CircularWall((x21-trw+trv)..., tr)
+
+	f_west_straight(s,v=0.) = VehicleState(s-ll/2, -lw/4, 0., v)
+	function f_west_right(s,v=0.)
+		if s <= ll/2-lw/4
+			vs = VehicleState(s-ll/2, -lw/4, 0., v)
+		else
+			vs = VehicleState(-lw/4, -lw/4-(s-(ll/2-lw/4)), -π/2, v)
+		end
+		return vs
+	end
+	function f_west_left(s,v=0.)
+		if s <= ll/2+lw/4
+			vs = VehicleState(s-ll/2, -lw/4, 0., v)
+		else
+			vs = VehicleState(+lw/4, -lw/4+(s-(ll/2+lw/4)), π/2, v)
+		end
+		return vs
+	end
 	f_east(s,v=0.) = VehicleState(ll/2 - s, lw/4, 3.14, v)
 	f_north(s,v=0.) = VehicleState(-lw/4, s, 4.71, v)
 	f_south(s,v=0.) = VehicleState(lw/4, ll/2 - s, 1.57, v)
 
 	# <start_direction>_lane
-	west_lane = Lane(1,
+	# West lane straight
+	west_lane_straight = Lane(1,
 					:west_lane,
-					[w3, w4, w9, w11],
+					[w101, w102],
 					Vector{CircularWall}(),
 					StartingArea(
-						VehicleState(-0.75*(ll-lw),  -lw/4, 0.0,  0.00),
-						VehicleState(-lw/2, -lw/4, 0.0, -0.05),
+						VehicleState(-ll/2, -lw/4, 0.0,  0.00),
+						VehicleState(-ll/2, -lw/4, 0.0, -0.05),
 						VehicleState(-ll/2, -lw/4, 0.4,  0.05),
 						),
-					f_west,
+					f_west_straight,
+					)
+	# West lane with right turn
+	west_lane_right = Lane(5,
+					:west_lane_right,
+					[w103, w104, w105, w106],
+					[c107],
+					StartingArea(
+						VehicleState(-ll/2, -lw/4, 0.0,  0.00),
+						VehicleState(-ll/2, -lw/4, 0.0, -0.05),
+						VehicleState(-ll/2, -lw/4, 0.4,  0.05),
+						),
+					f_west_right,
+					)
+	# West lane with left turn
+	west_lane_left = Lane(5,
+					:west_lane_left,
+					[w108, w109, w110, w111],
+					[c112],
+					StartingArea(
+						VehicleState(-ll/2, -lw/4, 0.0,  0.00),
+						VehicleState(-ll/2, -lw/4, 0.0, -0.05),
+						VehicleState(-ll/2, -lw/4, 0.4,  0.05),
+						),
+					f_west_left,
 					)
 
 	east_lane = Lane(2,
@@ -425,7 +520,7 @@ function build_roadway(opts::FourIntersectionRoadwayOptions{T}) where {T}
 					f_south,
 					)
 
-	lanes = [west_lane, east_lane, north_lane, south_lane]
+	lanes = [west_lane_straight, east_lane, north_lane, south_lane, west_lane_right, west_lane_left]
 	roadway = Roadway(lanes, opts)
 	return roadway
 end

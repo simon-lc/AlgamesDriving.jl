@@ -81,9 +81,9 @@
     f_left = roadway.lane[1].centerline
     f_right = roadway.lane[2].centerline
     f_both = roadway.lane[3].centerline
-    test_centerline_continuity(f_left)
-    test_centerline_continuity(f_right)
-    test_centerline_continuity(f_both)
+    @test test_centerline_continuity(f_left)
+    @test test_centerline_continuity(f_right)
+    @test test_centerline_continuity(f_both)
     @test typeof(f_left(0.0, 1.0)) <: VehicleState{T}
 
     s = rand()
@@ -126,12 +126,18 @@
     v = rand()
     @test f_straight_both(s,v) == VehicleState(s,-opts.lane_width/2,0.0,v)
 
-    test_centerline_continuity(f_straight_left)
-    test_centerline_continuity(f_straight_right)
-    test_centerline_continuity(f_straight_both)
-    test_centerline_continuity(f_merging_left)
-    test_centerline_continuity(f_merging_right)
-    test_centerline_continuity(f_merging_both)
+    @test test_centerline_continuity(f_straight_left)
+    @test test_centerline_continuity(f_straight_right)
+    @test test_centerline_continuity(f_straight_both)
+    @test test_centerline_continuity(f_merging_left)
+    @test test_centerline_continuity(f_merging_right)
+    @test test_centerline_continuity(f_merging_both)
 
-
+    # FourIntersectionRoadway
+    opts = FourIntersectionRoadwayOptions()
+    roadway = build_roadway(opts)
+    for i in length(roadway.lane)
+        @test roadway.lane[i].id == i
+        @test test_centerline_continuity(roadway.lane[i].centerline)
+    end
 end
