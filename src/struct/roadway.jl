@@ -539,7 +539,7 @@ function build_roadway(opts::FourIntersectionRoadwayOptions{T}) where {T}
 		if s <= ll/2 + lw/4
 			vs = VehicleState(lw/4, s - ll/2, 1.57, v)
 		else
-			vs = VehicleState(lw/4, +lw/4+(s-(ll/2+lw/4)), +π, v)
+			vs = VehicleState(lw/4, +lw/4+(s-(ll/2+lw/4)), 3.14, v)
 		end
 		return vs
 	end
