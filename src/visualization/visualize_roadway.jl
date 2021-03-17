@@ -99,10 +99,12 @@ function set_roadway!(vis::Visualizer, opts::FourIntersectionRoadwayOptions{T};
 	bh = vis_opts.bound_height
 
 	road_horizontal = Rect3D(Vec(-ll/2, -lw, -ϵ), Vec(ll, 2lw, ϵ))
-    line_horizontal = Rect3D(Vec(-ll/2, -liw/2, 0.0), Vec(ll, liw, liw))
+	line_horizontal_1 = Rect3D(Vec(-ll/2, -liw/2, 0.0), Vec(ll/2 - lw, liw, liw))
+	line_horizontal_2 = Rect3D(Vec(lw, -liw/2, 0.0), Vec(ll/2 - lw, liw, liw))
 
 	road_vertical = Rect3D(Vec(-lw, -ll/2, -ϵ), Vec(2lw, ll, ϵ))
-	line_vertical = Rect3D(Vec(-liw/2, -ll/2, 0.0), Vec(liw, ll, liw))
+	line_vertical_1 = Rect3D(Vec(-liw/2, -ll/2, 0.0), Vec(liw, ll/2 - lw, liw))
+	line_vertical_2 = Rect3D(Vec(-liw/2, lw, 0.0), Vec(liw, ll/2 - lw, liw))
 
 	horizontal_left_bound_w = Rect3D(Vec(-ll/2, lw, -ϵ), Vec(ll/2 - lw, bw, ϵ+bh))
     horizontal_right_bound_w = Rect3D(Vec(-ll/2, -lw-bw, -ϵ), Vec(ll/2 - lw, bw, ϵ+bh))
@@ -119,19 +121,31 @@ function set_roadway!(vis::Visualizer, opts::FourIntersectionRoadwayOptions{T};
 	vert_left_bound_s = Rect3D(Vec(lw, lw, -ϵ), Vec(bw, ll/2 - lw, ϵ+bh))
 	vert_right_bound_s = Rect3D(Vec(-lw-bw, lw, -ϵ), Vec(bw, ll/2 - lw, ϵ+bh))
 
+	stop_line_west = Rect3D(Vec(-lw, -lw, 0.0), Vec(liw, lw, liw))
+	stop_line_east = Rect3D(Vec(lw, 0, 0.0), Vec(liw, lw, liw))
+	stop_line_north = Rect3D(Vec(0, -lw, 0.0), Vec(lw, liw, liw))
+	stop_line_south = Rect3D(Vec(-lw, lw, 0.0), Vec(lw, liw, liw))
+
     setobject!(vis["env/roadway"]["road_horizontal"], road_horizontal, MeshPhongMaterial(color=vis_opts.road_color))
-	setobject!(vis["env/roadway"]["line_horizontal"], line_horizontal, MeshPhongMaterial(color=colorant"yellow"))
+	setobject!(vis["env/roadway"]["line_horizontal_1"], line_horizontal_1, MeshPhongMaterial(color=colorant"yellow"))
+	setobject!(vis["env/roadway"]["line_horizontal_2"], line_horizontal_2, MeshPhongMaterial(color=colorant"yellow"))
 	setobject!(vis["env/roadway"]["horizontal_left_bound_w"], horizontal_left_bound_w, MeshPhongMaterial(color=vis_opts.bound_color))
 	setobject!(vis["env/roadway"]["horizontal_right_bound_w"], horizontal_right_bound_w, MeshPhongMaterial(color=vis_opts.bound_color))
 	setobject!(vis["env/roadway"]["horizontal_left_bound_e"], horizontal_left_bound_e, MeshPhongMaterial(color=vis_opts.bound_color))
 	setobject!(vis["env/roadway"]["horizontal_right_bound_e"], horizontal_right_bound_e, MeshPhongMaterial(color=vis_opts.bound_color))
 
 	setobject!(vis["env/roadway"]["road_vertical"], road_vertical, MeshPhongMaterial(color=vis_opts.road_color))
-	setobject!(vis["env/roadway"]["line_vertical"], line_vertical, MeshPhongMaterial(color=colorant"yellow"))
+	setobject!(vis["env/roadway"]["line_vertical_1"], line_vertical_1, MeshPhongMaterial(color=colorant"yellow"))
+	setobject!(vis["env/roadway"]["line_vertical_2"], line_vertical_2, MeshPhongMaterial(color=colorant"yellow"))
 	setobject!(vis["env/roadway"]["vertical_left_bound_n"], vert_left_bound_n, MeshPhongMaterial(color=vis_opts.bound_color))
 	setobject!(vis["env/roadway"]["vertical_right_bound_n"], vert_right_bound_n, MeshPhongMaterial(color=vis_opts.bound_color))
 
 	setobject!(vis["env/roadway"]["vertical_left_bound_s"], vert_left_bound_s, MeshPhongMaterial(color=vis_opts.bound_color))
 	setobject!(vis["env/roadway"]["vertical_right_bound_s"], vert_right_bound_s, MeshPhongMaterial(color=vis_opts.bound_color))
+
+	setobject!(vis["env/roadway"]["stop_line_west"], stop_line_west, MeshPhongMaterial(color=colorant"white"))
+	setobject!(vis["env/roadway"]["stop_line_east"], stop_line_east, MeshPhongMaterial(color=colorant"white"))
+	setobject!(vis["env/roadway"]["stop_line_north"], stop_line_north, MeshPhongMaterial(color=colorant"white"))
+	setobject!(vis["env/roadway"]["stop_line_south"], stop_line_south, MeshPhongMaterial(color=colorant"white"))
     return nothing
 end
