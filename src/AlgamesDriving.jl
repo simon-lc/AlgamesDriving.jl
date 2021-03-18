@@ -116,6 +116,9 @@ include("struct/vehicle_state.jl")
 include("struct/starting_area.jl")
 include("struct/lane.jl")
 include("struct/roadway.jl")
+include("struct/highway_roadway.jl")
+include("struct/merging_roadway.jl")
+include("struct/four_intersection_roadway.jl")
 include("struct/player.jl")
 
 # Scenario

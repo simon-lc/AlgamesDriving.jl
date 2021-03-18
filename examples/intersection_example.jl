@@ -10,11 +10,6 @@ using MeshCat
 roadway_opts = FourIntersectionRoadwayOptions()
 roadway = build_roadway(roadway_opts)
 
-@show test_centerline_continuity(roadway.lane[1].centerline, sample=250)
-@show test_centerline_continuity(roadway.lane[2].centerline, sample=250)
-@show test_centerline_continuity(roadway.lane[3].centerline, sample=250)
-
-
 # Create Dynamics Model
 p = 3
 model = UnicycleGame(p=p)
@@ -44,13 +39,13 @@ players[3] = Player(model, roadway.lane[3],
 #     Q=Diagonal(SVector{model.ni[1]}([1,1,0.1,1])),
 #     x0=VehicleState(2.2, 0.1, 3.14, 0.9),
 #     xf=VehicleState( -0.5, 0.1, 3.14, 0.9))
-
+#
 # # east_right
 # players[2] = Player(model, roadway.lane[5],
 #     Q=Diagonal(SVector{model.ni[2]}([1,1,0.1,1])),
 #     x0=VehicleState(1.8, 0.1, 3.14, 0.9),
 #     xf=VehicleState(0.1, 1.0, π/2, 0.9))
-
+#
 # # east_left
 # players[3] = Player(model, roadway.lane[6],
 #     Q=Diagonal(SVector{model.ni[3]}([1,1,0.1,1])),
