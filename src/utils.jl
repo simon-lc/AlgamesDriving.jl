@@ -1,7 +1,7 @@
 # Run tests locally
 using Pkg
-Pkg.activate("/home/simon/.julia/dev/AlgamesDriving")
+Pkg.activate(joinpath(@__DIR__, ".."))
 # Pkg.test("AlgamesDriving")
 
 
-Pkg.activate("/home/simon/.julia/dev/AlgamesDriving/test")
+Pkg.activate(joinpath(@__DIR__, "../test"))
