@@ -13,10 +13,12 @@
     uf = rand(SVector{model.mi[1],T})
     u_min = rand(SVector{model.mi[1],T})
     u_max = rand(SVector{model.mi[1],T})
+    v_min = rand()
+    v_max = rand()
     r_col = 1.0
     r_cost = 1.0
     μ = 1.0
-    player = Player(x0, id, lane_id, Q, R, xf, uf, u_min, u_max, r_col, r_cost, μ)
+    player = Player(x0, id, lane_id, Q, R, xf, uf, u_min, u_max, v_min, v_max, r_col, r_cost, μ)
     @test typeof(player) <: Player
 
     lane = Lane()

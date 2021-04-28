@@ -83,6 +83,15 @@ function Algames.GameConstraintValues(N::Int, sce::Scenario{T}) where {T}
 
     for i = 1:p
         player = sce.player[i]
+        v_min = player.v_min
+        v_max = player.v_max
+        if v_min != -Inf || v_max != Inf # Avoid adding void constraints
+            add_velocity_bound!(model, game_con, i, v_max, v_min)
+        end
+    end
+
+    for i = 1:p
+        player = sce.player[i]
         lane = roadway.lane[player.lane_id]
         if length(lane.circle) > 0 # Avoid adding void constraints
             ri = radius[i]
@@ -104,6 +113,7 @@ function Algames.GameConstraintValues(N::Int, sce::Scenario{T}) where {T}
         end
         add_wall_constraint!(game_con, i, walls)
     end
+
     return game_con
 end
 

@@ -16,6 +16,24 @@ function plot_traj_!(model::AbstractGameModel, traj::Algames.Traj; plt=plot())
 end
 
 ################################################################################
+# Plot Velocity wrt time
+################################################################################
+
+function plot_velocity_!(model::AbstractGameModel, traj::Algames.Traj; plt=plot())
+    plot!(plt, xlabel="Time in s", ylabel="Velocity in m/s", legend=false)
+    N = length(traj)
+    veh_state = [standardize(model, Algames.state(traj[k])) for k=1:N]
+    t = [traj[k].t for k=1:N]
+    for i = 1:model.p
+        vi = [veh_state[k][i].v for k=1:N]
+        plot!(t, vi, label=false)
+        scatter!(t, vi)
+    end
+    display(plt)
+    return nothing
+end
+
+################################################################################
 # Constraint Violation Plot
 ################################################################################
 

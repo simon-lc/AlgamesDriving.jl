@@ -12,6 +12,8 @@ mutable struct Player{T,SMQ,SMR,SVx,SVu}
     uf::SVu        # LQR Cost uf
     u_min::SVu     # Bound constraint on the controls
     u_max::SVu     # Bound constraint on the controls
+	v_min::T       # Bound constraint on the velocity
+	v_max::T       # Bound constraint on the velocity
     r_col::T       # Collision radius of the car
     r_cost::T      # Radius of the collision avoidance cost
     μ::T           # Amplitude of the collision avoidance cost
@@ -29,6 +31,8 @@ function Player(model::AbstractGameModel, lane::Lane{T};
 				   μ::T=20.0,
 				   u_min::SVector{mi,T}=-Inf*ones(SVector{model.mi[1],T}),
 				   u_max::SVector{mi,T}=Inf*ones(SVector{model.mi[1],T}),
+				   v_min::T=-Inf,
+				   v_max::T=Inf,
 		) where {ni,mi,T}
 
 	x0_ = specialize(model, x0)
@@ -44,6 +48,8 @@ function Player(model::AbstractGameModel, lane::Lane{T};
 		uf,
 		u_min,
 		u_max,
+		v_min,
+		v_max,
 		r_col,
 		r_cost,
 		μ,
