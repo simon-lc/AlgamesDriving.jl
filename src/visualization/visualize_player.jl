@@ -12,7 +12,7 @@
 
 	"Car offset that puts the car is the correct orientation/position."
 	car_offset::AffineMap=compose(compose(compose(
-			Translation(0., 0., 0.03),
+			Translation(0., 0., 0.09),
 			LinearMap(AngleAxis(-0.012+pi/200, 0, 1, 0))),
 			LinearMap(AngleAxis(pi/2, 0, 0, 1))),
 			LinearMap(AngleAxis(pi/2, 1, 0, 0)))
@@ -98,7 +98,7 @@ function set_player!(vis::Visualizer, player::Player{T};
 	offset = vis_opts.car_offset
 
 	# Add car object
-	car = ModifiedMeshFileObject(objpath, mtlpath, scale=0.010)
+	car = ModifiedMeshFileObject(objpath, mtlpath, scale=0.030)
 	setobject!(vis[player_path*"/car"], car)
 	settransform!(vis[player_path*"/car"], offset)
 	# Add cylinder
