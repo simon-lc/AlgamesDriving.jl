@@ -10,12 +10,14 @@
 	"Path to the object files."
 	object_path::String=joinpath( Base.@__DIR__, "../../resources/object/car_geometry.obj")
 
+	"Scaling of the car 3D mesh."
+	car_scale::T=1.0
+
 	"Car offset that puts the car is the correct orientation/position."
-	car_offset::AffineMap=compose(compose(compose(
-			Translation(0., 0., 0.09),
-			LinearMap(AngleAxis(-0.012+pi/200, 0, 1, 0))),
-			LinearMap(AngleAxis(pi/2, 0, 0, 1))),
-			LinearMap(AngleAxis(pi/2, 1, 0, 0)))
+	car_offset::AbstractVector=[
+			LinearMap(AngleAxis(-0.012+pi/200, 0, 1, 0)),
+			LinearMap(AngleAxis(pi/2, 0, 0, 1)),
+			LinearMap(AngleAxis(pi/2, 1, 0, 0))]
 
 	"Height of the collision avoidance cylinder."
 	cylinder_height::T=0.02
@@ -81,6 +83,17 @@ end
 		)
 end
 
+function get_car_offset(vis_opts::PlayerVisualizationOptions)\
+	car_scale = vis_opts.car_scale
+	car_offset = vis_opts.car_offset
+	offset = compose(compose(compose(
+			Translation(0., 0., 0.03*car_scale),
+			car_offset[1]),
+			car_offset[2]),
+			car_offset[3])
+	return offset
+end
+
 ################################################################################
 # set_player!
 ################################################################################
@@ -95,10 +108,10 @@ function set_player!(vis::Visualizer, player::Player{T};
 	α = vis_opts.α
 	ch = vis_opts.cylinder_height
 	player_path = "env/player_key$key/player$(player.id)"
-	offset = vis_opts.car_offset
+	offset = get_car_offset(vis_opts)
 
 	# Add car object
-	car = ModifiedMeshFileObject(objpath, mtlpath, scale=0.030)
+	car = ModifiedMeshFileObject(objpath, mtlpath, scale=0.010*vis_opts.car_scale)
 	setobject!(vis[player_path*"/car"], car)
 	settransform!(vis[player_path*"/car"], offset)
 	# Add cylinder

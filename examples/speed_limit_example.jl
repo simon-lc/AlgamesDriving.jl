@@ -68,7 +68,8 @@ prob = GameProblem(N, dt, sce, solver_opts) # autonomous driving problem
 
 
 # Build environment
-set_scenario!(vis, sce)
+player_vis_opts = PlayerVisualizationOptions(car_scale=2.5)
+set_scenario!(vis, sce, player_vis_opts=player_vis_opts)
 # Set camera
 set_env!(vis, VehicleState(0.,0.,0.,0.))
 # Animate the vehicles
