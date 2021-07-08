@@ -17,8 +17,11 @@ The experiments are available [here](https://github.com/simon-lc/AlgamesDriving.
 
 ## Quick Start
 To run a simple example of a autonomous driving see script in /examples/intro_example.jl.
-
-
+- Install AlgamesDriving: `add AlgamesDriving#v0.1.4`
+- Install Algames: `add Algames#v0.1.6`
+- Install Plots: `add Plots`
+- Add other dependencies: `add LinearAlgebra Meshcat StaticArrays`
+- run the script!
 
 ## Starter Code
 Generate Autonomous Driving Scenario
