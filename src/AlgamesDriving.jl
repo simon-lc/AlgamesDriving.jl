@@ -104,11 +104,11 @@ export
     first_order_rollout,
     simulate_MPC!
 
-# Plots
-export
-    plot_traj_!,
-    plot_violation_!,
-    plot_epochs_!
+# # Plots
+# export
+#     plot_traj_!,
+#     plot_violation_!,
+#     plot_epochs_!
 
 
 # Struct
@@ -126,11 +126,18 @@ include("scenario/scenario.jl")
 
 # Visualization
 include("visualization/visualization_methods.jl")
-include("visualization/visualize_roadway.jl")
-include("visualization/visualize_player.jl")
-include("visualization/visualize_scenario.jl")
-include("visualization/visualize_trajectory.jl")
 include("visualization/camera.jl")
+include("visualization/vehicle/visualize_roadway.jl")
+include("visualization/vehicle/visualize_player.jl")
+include("visualization/vehicle/visualize_scenario.jl")
+include("visualization/vehicle/visualize_trajectory.jl")
+include("visualization/drone/static_object.jl")
+include("visualization/drone/constraint.jl")
+include("visualization/drone/animation.jl")
+include("visualization/drone/bicycle.jl")
+include("visualization/drone/double_integrator.jl")
+include("visualization/drone/quadrotor.jl")
+include("visualization/drone/unicycle.jl")
 
 # MPC
 include("mpc/mpc_struct.jl")
@@ -138,6 +145,9 @@ include("mpc/mpc_methods.jl")
 include("mpc/game.jl")
 
 # Plots
-include("plots/solver_plots.jl")
+# include("plots/solver_plots.jl")
+
+# Utils
+include("utils.jl")
 
 end # module

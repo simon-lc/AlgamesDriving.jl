@@ -1,3 +1,49 @@
+################################################################################
+# Utils
+################################################################################
+
+# rotation matrix rotating unit vector a onto unit vector b
+function rot(a, b)
+	v = cross(a, b)
+	s = sqrt(transpose(v) * v)
+	c = transpose(a) * b
+
+	R = Diagonal(@SVector ones(3)) + skew(v) + 1.0 / (1.0 + c) * skew(v) * skew(v)
+end
+
+function skew(x)
+	SMatrix{3,3}([0.0 -x[3] x[2];
+	               x[3] 0.0 -x[1];
+				   -x[2] x[1] 0.0])
+end
+
+function default_background!(vis)
+    setvisible!(vis["/Background"], true)
+    setprop!(vis["/Background"], "top_color", RGBA(1.0, 1.0, 1.0, 1.0))
+    setprop!(vis["/Background"], "bottom_color", RGBA(1.0, 1.0, 1.0, 1.0))
+    setvisible!(vis["/Axes"], false)
+end
+
+function get_material(;α=1.0)
+    orange_col = [1,153/255,51/255]
+    blue_col = [51/255,1,1]
+    black_col = [0,0,0]
+    orange_mat = MeshPhongMaterial(color=MeshCat.RGBA(orange_col...,α))
+    blue_mat = MeshPhongMaterial(color=MeshCat.RGBA(blue_col...,α))
+    black_mat = MeshPhongMaterial(color=MeshCat.RGBA(black_col...,α))
+    return orange_mat, blue_mat, black_mat
+end
+
+function get_line_material(size::Real; α=1.0)
+    orange_col = [1,153/255,51/255]
+    blue_col = [51/255,1,1]
+    black_col = [0,0,0]
+    orange_mat = LineBasicMaterial(color=color=RGBA(orange_col...,α), linewidth=size)
+    blue_mat = LineBasicMaterial(color=color=RGBA(blue_col...,α), linewidth=size)
+    black_mat = LineBasicMaterial(color=color=RGBA(black_col...,α), linewidth=size)
+    return orange_mat, blue_mat, black_mat
+end
+
 function clean!(vis::Visualizer)
     delete!(vis["/Grid"])
     delete!(vis["/Axes"])

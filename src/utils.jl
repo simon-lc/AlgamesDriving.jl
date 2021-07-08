@@ -1,7 +1,3 @@
-# Run tests locally
-using Pkg
-Pkg.activate(joinpath(@__DIR__, ".."))
-# Pkg.test("AlgamesDriving")
-
-
-Pkg.activate(joinpath(@__DIR__, "../test"))
+function module_dir()
+	return joinpath(@__DIR__, "..")
+end
