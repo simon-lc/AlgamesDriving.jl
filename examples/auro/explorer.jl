@@ -181,7 +181,7 @@ function newton_solver(α::T, λ::AbstractVector, x::AbstractVector, v::Abstract
 	xp = deepcopy(x + α*v)
 
 	for l = 1:1
-		# plot_traj2!(prob.model, prob.pdtraj.pr)
+		# plot!(prob.model, prob.pdtraj.pr)
 		@show scn(mean(abs.(c(xp, ascore, prob_copy2)[vmask])))
 
 		g = grad(xp, α, λ, x, v, β, ascore, prob, vmask)

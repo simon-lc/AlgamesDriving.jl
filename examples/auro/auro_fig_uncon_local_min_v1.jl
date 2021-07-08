@@ -48,8 +48,8 @@ init_traj!(prob.pdtraj, f=rand, amplitude=1e-8)
 solver_opts.shift = 0
 @time newton_solve!(prob)
 
-plot_traj2!(model, prob.pdtraj.pr)
-plot_violation2!(prob.stats)
+plot!(model, prob.pdtraj.pr)
+plot!(prob.stats)
 
 # Visualize trajectory
 set_scenario!(vis, sce)
@@ -90,12 +90,12 @@ function vizz(prob)
         con = mean(abs.(prob.stats.con_vio[end].vio))
         opts = prob.opts
         if opt < opts.ϵ_opt && sta < opts.ϵ_sta && dyn < opts.ϵ_dyn && con < opts.ϵ_con
-            # plot_violation_!(prob.stats)
-            # plot_traj_!(prob.model, init.pr)
-            plot_traj_!(prob.model, sol.pr)
+            # plot!(prob.stats)
+            # plot!(prob.model, init.pr)
+            plot!(prob.model, sol.pr)
             @time set_waypoint_traj!(vis, model, sce, init.pr)
             # sleep(1.0)
-            # plot_traj_!(prob.model, prob.pdtraj.pr)
+            # plot!(prob.model, prob.pdtraj.pr)
             @time set_traj!(vis, model, sce, prob.pdtraj.pr)
             build_waypoint!(vis, sce.player, N, key=k)
             @time set_waypoint_traj!(vis, model, sce, sol.pr, key=k)
@@ -115,7 +115,7 @@ end
 init_traj!(prob.pdtraj; x0=prob.x0, f=prob.opts.f_init, amplitude=prob.opts.amplitude_init, s=prob.opts.shift)
 Algames.rollout!(Algames.RK3, prob.model, prob.pdtraj.pr)
 set_waypoint_traj!(vis, model, sce, prob.pdtraj.pr)
-plot_traj2!(model, prob.pdtraj.pr)
+plot!(model, prob.pdtraj.pr)
 
 function figgg(prob::Algames.GameProblem)
     prob.opts.shift = 2^10
@@ -144,7 +144,7 @@ function figgg(prob::Algames.GameProblem)
         prob.opts.outer_iter = 20
         @time newton_solve!(prob)
         sol_traj = deepcopy(prob.pdtraj)
-        plot_violation2!(prob.stats)
+        plot!(prob.stats)
 
         opt = mean(abs.(prob.stats.opt_vio[end].vio))
         sta = mean(abs.(prob.stats.sta_vio[end].vio))
@@ -152,8 +152,8 @@ function figgg(prob::Algames.GameProblem)
         con = mean(abs.(prob.stats.con_vio[end].vio))
         opts = prob.opts
         if opt < opts.ϵ_opt && sta < opts.ϵ_sta && dyn < opts.ϵ_dyn && con < opts.ϵ_con
-            plot_traj2!(model, init_traj.pr, plt=plt)
-            plot_traj2!(model, sol_traj.pr, plt=plt2)
+            plot!(model, init_traj.pr, plt=plt)
+            plot!(model, sol_traj.pr, plt=plt2)
             push!(sol, sol_traj)
             push!(init, init_traj)
         end
@@ -164,4 +164,4 @@ end
 
 figgg(prob)
 
-plot_traj_!
+plot!

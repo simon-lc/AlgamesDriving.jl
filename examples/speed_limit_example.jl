@@ -76,6 +76,6 @@ set_env!(vis, VehicleState(0.,0.,0.,0.))
 set_traj!(vis, model, sce, prob.pdtraj.pr)
 
 # Plotting vehicles' trajectories and velocities and the solver's progress
-plot_violation_!(prob.stats)
-plot_traj_!(model, prob.pdtraj.pr)
+plot!(prob.stats)
+plot!(model, prob.pdtraj.pr)
 plot_velocity_!(model, prob.pdtraj.pr)

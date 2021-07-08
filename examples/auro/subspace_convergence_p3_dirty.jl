@@ -91,8 +91,8 @@ prob = GameProblem(N,dt,x0,model,opts,game_obj,game_con)
 # Solve the problem
 @time newton_solve!(prob)
 
-plot_traj!(prob.model, prob.pdtraj.pr)
-plot_violation!(prob.stats)
+plot!(prob.model, prob.pdtraj.pr)
+plot!(prob.stats)
 
 
 
@@ -237,11 +237,11 @@ function display_nullspace(prob_; M::Int=5, amplitude::T=1e-3, atol::T=1e-10) wh
         println("opt = "*scn(opt)*"  ", opt <= prob.opts.ϵ_opt )
         println("sta = "*scn(sta)*"  ", opt <= prob.opts.ϵ_opt )
         println("dyn = "*scn(dyn)*"  ", opt <= prob.opts.ϵ_opt )
-        # plot_violation!(prob.stats)
+        # plot!(prob.stats)
         if opt < 1e-5
-            plot_traj!(prob.model, prob.pdtraj.pr, plt=plt)
+            plot!(prob.model, prob.pdtraj.pr, plt=plt)
         end
-        # plot_violation!(prob.stats)
+        # plot!(prob.stats)
     end
     path = joinpath("~/Documents/nullspace_p3_din.gif")
     gif(anim, path, fps = 10)
@@ -290,9 +290,9 @@ function follow_nullspace(prob; M::Int=5, amplitude::T=1e-3, atol::T=1e-10) wher
         println("sta = "*scn(sta)*"  ", opt <= prob.opts.ϵ_opt )
         println("dyn = "*scn(dyn)*"  ", opt <= prob.opts.ϵ_opt )
         if opt < 1e-5
-            plot_traj!(prob.model, prob.pdtraj.pr, plt=plt)
+            plot!(prob.model, prob.pdtraj.pr, plt=plt)
         end
-        # plot_violation!(prob.stats)
+        # plot!(prob.stats)
     end
     path = joinpath("~/Documents/follow_nullspace_p3_uni.gif")
     gif(anim, path, fps = 20)

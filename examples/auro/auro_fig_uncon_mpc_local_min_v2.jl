@@ -80,8 +80,8 @@ prob = Algames.GameProblem(N,dt,x0,model,opts,game_obj,game_con)
 # Solve the problem
 newton_solve!(prob)
 
-plot_traj2!(prob.model, prob.pdtraj.pr)
-plot_violation2!(prob.stats)
+plot!(prob.model, prob.pdtraj.pr)
+plot!(prob.stats)
 
 set_control!(z::Algames.KnotPoint, u) = z.z = [Algames.state(z); u]
 
@@ -121,8 +121,8 @@ function mpc_loop(prob::Algames.GameProblem, x0::SVx, sce::Scenario, vis::Vector
         newton_solve!(probs[i])
         probs[i].opts.shift = 0
         probs[i].opts.amplitude_init = 1e-8
-        plot_traj2!(probs[i].model, probs[i].pdtraj.pr)
-        # plot_violation2!(probs[i].stats)
+        plot!(probs[i].model, probs[i].pdtraj.pr)
+        # plot!(probs[i].stats)
     end
 
 

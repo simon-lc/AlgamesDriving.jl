@@ -61,8 +61,8 @@ prob = Algames.GameProblem(N,dt,x0,model,opts,game_obj,game_con)
 # Solve the problem
 newton_solve!(prob)
 
-plot_traj2!(prob.model, prob.pdtraj.pr)
-plot_violation2!(prob.stats)
+plot!(prob.model, prob.pdtraj.pr)
+plot!(prob.stats)
 
 players = Vector{Player{T}}(undef, p)
 player_opts = HighwayPlayerOptions{model.ni[1],model.mi[1],T}()
@@ -118,8 +118,8 @@ function get_figure(prob::Algames.GameProblem, sce::Scenario, vis_sol::Visualize
             set_waypoint_traj!(vis_init, model, sce, init_traj.pr, key=k)
             set_waypoint_traj!(vis_sol,  model, sce, sol_traj.pr, key=k)
 
-            plot_traj2!(model, init_traj.pr, plt=plt_init)
-            plot_traj2!(model, sol_traj.pr, plt=plt_sol)
+            plot!(model, init_traj.pr, plt=plt_init)
+            plot!(model, sol_traj.pr, plt=plt_sol)
             push!(sol, sol_traj)
             push!(init, init_traj)
         end

@@ -106,9 +106,6 @@ export
 
 # # Plots
 # export
-#     plot_traj_!,
-#     plot_violation_!,
-#     plot_epochs_!
 
 
 # Struct
@@ -145,7 +142,6 @@ include("mpc/mpc_methods.jl")
 include("mpc/game.jl")
 
 # Plots
-# include("plots/solver_plots.jl")
 
 # Utils
 include("utils.jl")

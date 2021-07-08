@@ -85,8 +85,8 @@ prob = GameProblem(N,dt,x0,model,opts,game_obj,game_con)
 
 # Visualize the Results
 using Plots
-Algames.plot_traj!(prob.model, prob.pdtraj.pr)
-Algames.plot_violation!(prob.stats)
+Algames.plot!(prob.model, prob.pdtraj.pr)
+Algames.plot!(prob.stats)
 
 build_traj!(vis, model, prob.pdtraj.pr, α=1.0, name=:Traj_orange)
 build_xf!(vis, model, xf, α=1.0, name=:Xf)

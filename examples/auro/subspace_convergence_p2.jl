@@ -99,8 +99,8 @@ prob.game_con.state_conval[1][1]
 @time newton_solve!(prob)
 # @profiler newton_solve!(prob)
 
-plot_traj!(prob.model, prob.pdtraj.pr)
-plot_violation!(prob.stats)
+plot!(prob.model, prob.pdtraj.pr)
+plot!(prob.stats)
 
 function subspace_animation(prob::GameProblem)
     p = prob.probsize.p
@@ -112,9 +112,9 @@ function subspace_animation(prob::GameProblem)
         prob.opts.αx_dual = [sqrt(s), 1/sqrt(s)]
         set_constraint_params!(prob.game_con, prob.opts)
         newton_solve!(prob)
-        plot_traj!(prob.model, prob.pdtraj.pr, plt=plt)
+        plot!(prob.model, prob.pdtraj.pr, plt=plt)
         text(plt,4, 0.5, "hello")
-        # plot_violation!(prob.stats)
+        # plot!(prob.stats)
     end
     path = joinpath("~/Documents/p2_subspace_din.gif")
     gif(anim, path, fps = 10)

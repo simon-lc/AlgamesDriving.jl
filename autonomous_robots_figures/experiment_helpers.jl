@@ -170,7 +170,7 @@ function pca(prob::Algames.GameProblem, subspace::Vector{PrimalDualTraj}; β::T=
 
     plt = plot(legend=false)
     pdtraj_ref = subspace[1]
-    plot_traj_!(prob.model, pdtraj_ref.pr, plt=plt)
+    plot!(prob.model, pdtraj_ref.pr, plt=plt)
 
     pdtraj_1 = deepcopy(pdtraj_ref)
     v1 = zeros(S)

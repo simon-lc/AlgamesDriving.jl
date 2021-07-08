@@ -68,8 +68,8 @@ prob = Algames.GameProblem(N,dt,x0,model,opts,game_obj,game_con)
 # Solve the problem
 newton_solve!(prob)
 
-plot_traj2!(prob.model, prob.pdtraj.pr)
-plot_violation2!(prob.stats)
+plot!(prob.model, prob.pdtraj.pr)
+plot!(prob.stats)
 
 players = Vector{Player{T}}(undef, p)
 player_opts = HighwayPlayerOptions{model.ni[1],model.mi[1],T}()
@@ -144,7 +144,7 @@ jac(xp, α, λ, x, v, β, ascore, prob_copy, vmask)
 α = 1e-4
 maximum(abs.(α*v))
 
-plot_traj2!(model, prob_copy.pdtraj.pr)
+plot!(model, prob_copy.pdtraj.pr)
 prob_copy2 = deepcopy(prob)
 λ = 1e-10*rand(Sv)
 xp, λ = newton_solver(α, λ, x, v, β, ascore, prob_copy2, vmask)
@@ -153,10 +153,10 @@ f(xp, α, x, v, β)
 λ[vmask]'*c(xp, ascore, prob_copy2)[vmask]
 mean(abs.(λ[vmask]))
 
-plot_traj2!(model, prob_copy.pdtraj.pr)
-plot_traj2!(model, prob_copy2.pdtraj.pr)
+plot!(model, prob_copy.pdtraj.pr)
+plot!(model, prob_copy2.pdtraj.pr)
 set_primal_dual!(ascore, prob_copy2, x+α*v)
-plot_traj2!(model, prob_copy2.pdtraj.pr)
+plot!(model, prob_copy2.pdtraj.pr)
 
 λ[vmask][end-28+1:end]'*c(xp, ascore, prob_copy2)[vmask][end-28+1:end]
 λ[vmask][end-30:end]
@@ -167,8 +167,8 @@ maximum(abs.(c(xp, ascore, prob_copy2)[vmask][end-30:end]))
 mean(abs.(c(xp, ascore, prob_copy2)[vmask]))
 
 set_primal_dual!(ascore, prob_copy2, x+1e-1*v)
-plot_traj2!(model, prob.pdtraj.pr)
-plot_traj2!(model, prob_copy2.pdtraj.pr)
+plot!(model, prob.pdtraj.pr)
+plot!(model, prob_copy2.pdtraj.pr)
 
 mean(abs.(xp))
 mean(abs.(x))
@@ -221,7 +221,7 @@ a = 10
 #
 # include("explorer.jl")
 # prob_copy = deepcopy(prob)
-# # plot_traj2!(model, prob_copy.pdtraj.pr)
+# # plot!(model, prob_copy.pdtraj.pr)
 # ascore = ActiveSetCore(probsize)
 # active_vertical_mask!(ascore, prob_copy.game_con)
 # vmask = deepcopy(ascore.vmask)
@@ -401,7 +401,7 @@ function subspace_dimension(prob::Algames.GameProblem; α::T=2e-3) where {T}
         update_traj!(prob.pdtraj, prob_.pdtraj, 1.0, prob_.Δpdtraj)
         update_λ!(ascore, prob_, α*ascore.null.Δλ[l])
         newton_solve!(prob_)
-        # plot_violation2!(prob_.stats)
+        # plot!(prob_.stats)
 
         opt = mean(abs.(prob_.stats.opt_vio[end].vio))
         sta = mean(abs.(prob_.stats.sta_vio[end].vio))
@@ -411,7 +411,7 @@ function subspace_dimension(prob::Algames.GameProblem; α::T=2e-3) where {T}
         if opt < opts.ϵ_opt && sta < opts.ϵ_sta && dyn < opts.ϵ_dyn && con < opts.ϵ_con
             val += 1
 			@show val
-            # plot_traj2!(prob_.model, prob_.pdtraj.pr, plt=plt)
+            # plot!(prob_.model, prob_.pdtraj.pr, plt=plt)
             push!(subspace, deepcopy(prob_.pdtraj))
         end
     end
@@ -457,7 +457,7 @@ function pca(prob::Algames.GameProblem, subspace::Vector{PrimalDualTraj}; β::T=
 
     plt = plot(legend=false)
     pdtraj_ref = subspace[1]
-    plot_traj2!(prob.model, pdtraj_ref.pr, plt=plt)
+    plot!(prob.model, pdtraj_ref.pr, plt=plt)
 
     pdtraj_1 = deepcopy(pdtraj_ref)
     v1 = zeros(S)
@@ -627,5 +627,5 @@ end
 # @time newton_solve!(prob)
 # # @profiler newton_solve!(prob)
 #
-# plot_traj_!(prob.model, prob.pdtraj.pr)
-# plot_violation_!(prob.stats)
+# plot!(prob.model, prob.pdtraj.pr)
+# plot!(prob.stats)

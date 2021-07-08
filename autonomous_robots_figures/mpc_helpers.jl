@@ -36,7 +36,7 @@ function mpc_loop(prob::Algames.GameProblem, x0::SVx, sce::Scenario, vis::Vector
         newton_solve!(probs[i])
         probs[i].opts.shift = 0
         probs[i].opts.amplitude_init = 1e-8
-        plot_traj_!(probs[i].model, probs[i].pdtraj.pr)
+        plot!(probs[i].model, probs[i].pdtraj.pr)
     end
 
 

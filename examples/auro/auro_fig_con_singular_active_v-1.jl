@@ -65,8 +65,8 @@ prob = Algames.GameProblem(N,dt,x0,model,opts,game_obj,game_con)
 # Solve the problem
 newton_solve!(prob)
 
-plot_traj_!(prob.model, prob.pdtraj.pr)
-plot_violation_!(prob.stats)
+plot!(prob.model, prob.pdtraj.pr)
+plot!(prob.stats)
 
 players = Vector{Player{T}}(undef, p)
 players[1] = Player(model, roadway.lane[3])
@@ -224,7 +224,7 @@ function subspace_dimension(prob::Algames.GameProblem; α::T=2e-3) where {T}
         update_traj!(prob.pdtraj, prob_.pdtraj, 1.0, prob_.Δpdtraj)
         update_λ!(ascore, prob_, α*ascore.null.Δλ[l])
         newton_solve!(prob_)
-        # plot_violation2!(prob_.stats)
+        # plot!(prob_.stats)
 
         opt = mean(abs.(prob_.stats.opt_vio[end].vio))
         sta = mean(abs.(prob_.stats.sta_vio[end].vio))
@@ -234,7 +234,7 @@ function subspace_dimension(prob::Algames.GameProblem; α::T=2e-3) where {T}
         if opt < opts.ϵ_opt && sta < opts.ϵ_sta && dyn < opts.ϵ_dyn && con < opts.ϵ_con
             val += 1
 			@show val
-            # plot_traj2!(prob_.model, prob_.pdtraj.pr, plt=plt)
+            # plot!(prob_.model, prob_.pdtraj.pr, plt=plt)
             push!(subspace, deepcopy(prob_.pdtraj))
         end
     end
@@ -280,7 +280,7 @@ function pca(prob::Algames.GameProblem, subspace::Vector{PrimalDualTraj}; β::T=
 
     plt = plot(legend=false)
     pdtraj_ref = subspace[1]
-    plot_traj2!(prob.model, pdtraj_ref.pr, plt=plt)
+    plot!(prob.model, pdtraj_ref.pr, plt=plt)
 
     pdtraj_1 = deepcopy(pdtraj_ref)
     v1 = zeros(S)

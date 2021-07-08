@@ -85,8 +85,8 @@ prob = Algames.GameProblem(N,dt,x0,model,opts,game_obj,game_con)
 @time newton_solve!(prob)
 # @profiler newton_solve!(prob)
 
-plot_traj_!(prob.model, prob.pdtraj.pr)
-plot_violation_!(prob.stats)
+plot!(prob.model, prob.pdtraj.pr)
+plot!(prob.stats)
 
 prob.stats.outer_iter
 # kick out of inner loop if not progress made
@@ -101,11 +101,11 @@ function traj_dist(prob::Algames.GameProblem ;M::Int=10)
         newton_solve!(prob)
         push!(traj, deepcopy(prob.pdtraj.pr))
     end
-    plot_trajset(prob.model, traj)
+    plotset(prob.model, traj)
     return traj
 end
 
-function plot_trajset(model::AbstractGameModel, traj)
+function plotset(model::AbstractGameModel, traj)
     plt = plot(aspect_ratio=:equal)
     M = length(traj)
     N = length(traj[1])

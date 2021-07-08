@@ -98,8 +98,8 @@ prob.game_con.state_conval[1][1]
 @time newton_solve!(prob)
 # @profiler newton_solve!(prob)
 
-plot_traj!(prob.model, prob.pdtraj.pr)
-plot_violation!(prob.stats)
+plot!(prob.model, prob.pdtraj.pr)
+plot!(prob.stats)
 
 residual!(prob, prob.pdtraj)
 # regularize_residual!(prob.core, prob.opts, prob.pdtraj, prob.pdtraj)
@@ -144,7 +144,7 @@ function evolve(prob::GameProblem, dt::T) where {T}
         update_traj!(prob.pdtraj, prob.pdtraj, α, eig_pdtraj)
         prob.opts.shift = 0
         newton_solve!(prob)
-        plot_traj!(prob.model, prob.pdtraj.pr)
+        plot!(prob.model, prob.pdtraj.pr)
     end
     return nothing
 end
@@ -186,11 +186,11 @@ function traj_dist(prob::GameProblem ;M::Int=10)
         deepcopy(prob.pdtraj.pr)
         push!(traj, deepcopy(prob.pdtraj.pr))
     end
-    plot_trajset(prob.model, traj)
+    plotset(prob.model, traj)
     return traj
 end
 
-function plot_trajset(model::AbstractGameModel, traj)
+function plotset(model::AbstractGameModel, traj)
     plt = plot(aspect_ratio=:equal)
     M = length(traj)
     N = length(traj[1])

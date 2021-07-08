@@ -81,8 +81,8 @@ function quadrotor_experiment(vis::Visualizer; p::Int=2, animate::Bool=false, S:
 	t_elapsed /= S
 
 	# Visualize the Results
-	plot_traj!(prob.model, prob.pdtraj.pr)
-	plot_violation!(prob.stats)
+	plot!(prob.model, prob.pdtraj.pr)
+	plot!(prob.stats)
 
 	build_traj!(vis, model, prob.pdtraj.pr, α=1.0, name=:Traj)
 	build_xf!(vis, model, xf, α=1.0, name=:Xf)
@@ -165,8 +165,8 @@ function double_integrator_3D_experiment(vis::Visualizer; p::Int=2, animate::Boo
 	t_elapsed /= S
 
 	# Visualize the Results
-	plot_traj!(prob.model, prob.pdtraj.pr)
-	plot_violation!(prob.stats)
+	plot!(prob.model, prob.pdtraj.pr)
+	plot!(prob.stats)
 
 	build_traj!(vis, model, prob.pdtraj.pr, α=1.0, name=:Traj)
 	build_xf!(vis, model, xf, α=1.0, name=:Xf)
@@ -253,8 +253,8 @@ function double_integrator_2D_experiment(vis::Visualizer; p::Int=2, animate::Boo
 	t_elapsed /= S
 
 	# Visualize the Results
-	plot_traj!(prob.model, prob.pdtraj.pr)
-	plot_violation!(prob.stats)
+	plot!(prob.model, prob.pdtraj.pr)
+	plot!(prob.stats)
 
 	build_traj!(vis, model, prob.pdtraj.pr, α=1.0, name=:Traj)
 	build_xf!(vis, model, xf, α=1.0, name=:Xf)
@@ -341,8 +341,8 @@ function unicycle_experiment(vis::Visualizer; p::Int=2, animate::Bool=false, S::
 	t_elapsed /= S
 
 	# Visualize the Results
-	plot_traj!(prob.model, prob.pdtraj.pr)
-	plot_violation!(prob.stats)
+	plot!(prob.model, prob.pdtraj.pr)
+	plot!(prob.stats)
 
 	build_traj!(vis, model, prob.pdtraj.pr, α=1.0, name=:Traj)
 	build_xf!(vis, model, xf, α=1.0, name=:Xf)
@@ -429,8 +429,8 @@ function bicycle_experiment(vis::Visualizer; p::Int=2, animate::Bool=false, S::I
 	t_elapsed /= S
 
 	# Visualize the Results
-	plot_traj!(prob.model, prob.pdtraj.pr)
-	plot_violation!(prob.stats)
+	plot!(prob.model, prob.pdtraj.pr)
+	plot!(prob.stats)
 
 	build_traj!(vis, model, prob.pdtraj.pr, α=1.0, name=:Traj)
 	build_xf!(vis, model, xf, α=1.0, name=:Xf)
@@ -507,8 +507,8 @@ end
 @show scn.(t4)
 @show scn.(t5)
 
-import Algames.plot_traj!
-function plot_traj!(model::AbstractGameModel, traj::Algames.Traj; plt=plot())
+import Algames.plot!
+function plot!(model::AbstractGameModel, traj::Algames.Traj; plt=plot())
     plot!(plt, legend=false, aspect_ratio=:equal)
     N = length(traj)
     for i = 1:model.p
@@ -523,9 +523,9 @@ end
 
 
 
-import Algames.plot_violation!
+import Algames.plot!
 
-function plot_violation!(stats::Statistics; plt=plot(), lw::T=5.0) where {T}
+function plot!(stats::Statistics; plt=plot(), lw::T=5.0) where {T}
 	plot!(plt,
 		size=(500,500),
 		layout=(1,1,))

@@ -92,8 +92,8 @@ prob = GameProblem(N,dt,x0,model,opts,game_obj,game_con)
 @time newton_solve!(prob)
 # @profiler newton_solve!(prob)
 
-plot_traj!(prob.model, prob.pdtraj.pr)
-plot_violation!(prob.stats)
+plot!(prob.model, prob.pdtraj.pr)
+plot!(prob.stats)
 
 
 
@@ -158,7 +158,7 @@ function subspace_dimension(prob::GameProblem; α::T=2e-3) where {T}
         update_traj!(prob.pdtraj, prob_.pdtraj, 1.0, prob_.Δpdtraj)
         update_λ!(ascore, prob_, α*ascore.null.Δλ[l])
         newton_solve!(prob_)
-        plot_violation!(prob_.stats)
+        plot!(prob_.stats)
 
         opt = mean(abs.(prob_.stats.opt_vio[end].vio))
         sta = mean(abs.(prob_.stats.sta_vio[end].vio))
@@ -167,7 +167,7 @@ function subspace_dimension(prob::GameProblem; α::T=2e-3) where {T}
         opts = prob_.opts
         if opt < opts.ϵ_opt && sta < opts.ϵ_sta && dyn < opts.ϵ_dyn && con < opts.ϵ_con
             val += 1
-            plot_traj!(prob_.model, prob_.pdtraj.pr, plt=plt)
+            plot!(prob_.model, prob_.pdtraj.pr, plt=plt)
             push!(subspace, deepcopy(prob_.pdtraj))
         end
     end
@@ -221,7 +221,7 @@ function pca(prob::GameProblem, subspace::Vector{PrimalDualTraj})
 
     plt = plot(legend=false)
     pdtraj_ref = subspace[1]
-    plot_traj!(prob.model, pdtraj_ref.pr, plt=plt)
+    plot!(prob.model, pdtraj_ref.pr, plt=plt)
 
     pdtraj_1 = deepcopy(pdtraj_ref)
     v1 = zeros(S)

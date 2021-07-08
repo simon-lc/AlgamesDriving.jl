@@ -99,8 +99,8 @@ prob = GameProblem(N, dt, sce, solver_opts) # autonomous driving problem
 @time newton_solve!(prob) # solve the problem
 
 # Plotting vehicles' trajectories and the solver's progress
-# plot_traj_!(model, prob.pdtraj.pr)
-# plot_violation_!(prob.stats)
+# plot!(model, prob.pdtraj.pr)
+# plot!(prob.stats)
 
 # Visualize Scenario
 vis = Visualizer()

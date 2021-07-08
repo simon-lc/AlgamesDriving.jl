@@ -41,8 +41,8 @@ solver_opts.ϵ_opt = 1e-2
 prob = GameProblem(N, dt, sce, solver_opts)
 @time newton_solve!(prob)
 
-plot_traj_!(model, prob.pdtraj.pr)
-plot_violation_!(prob.stats)
+plot!(model, prob.pdtraj.pr)
+plot!(prob.stats)
 
 # Visualize trajectory
 set_scenario!(vis, sce)
