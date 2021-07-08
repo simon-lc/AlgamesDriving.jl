@@ -38,6 +38,7 @@ prob = GameProblem(N, dt, sce, solver_opts) # atonomous driving problem
 @time newton_solve!(prob) # solve the problem
 
 # Plotting vehicles' trajectories and the solver's progress
+using Plots
 plot!(model, prob.pdtraj.pr)
 plot!(prob.stats)
 
