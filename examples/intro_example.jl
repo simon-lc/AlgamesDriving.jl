@@ -39,8 +39,8 @@ prob = GameProblem(N, dt, sce, solver_opts) # atonomous driving problem
 
 # Plotting vehicles' trajectories and the solver's progress
 using Plots
-plot!(model, prob.pdtraj.pr)
-plot!(prob.stats)
+plot(model, prob.pdtraj.pr)
+plot(prob.stats)
 
 # Visualize Scenario
 vis = Visualizer()
