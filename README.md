@@ -13,7 +13,7 @@ Pkg.add("AlgamesDriving")
 [RSS 2020](http://www.roboticsproceedings.org/rss16/p091.pdf)
 
 ## Autonomous Robots paper submission:
-The experiments are available [here](https://github.com/simon-lc/AlgamesDriving.jl/tree/autonomous_robots_2021/autonomous_robots_figures).
+The experiments are available [here](https://github.com/simon-lc/AlgamesDriving.jl/tree/autonomous_robots_2021_revisions/autonomous_robots_figures).
 
 ## Quick Start
 To run a simple example of a autonomous driving see script in /examples/intro_example.jl.
